@@ -65,7 +65,7 @@ function openSideMenu() {
   sideMenu.style.left = "0px";
 isSideMenuOpen = true; clearSearch(); }
 function closeSideMenu() {
-  sideMenu.style.left = "-16rem";
+  sideMenu.style.left = "-18rem";
 isSideMenuOpen = false;
 }
 function clearSideMenuActive() {
