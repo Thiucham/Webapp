@@ -3,15 +3,15 @@ let baseSongs = [];
 let currentDatasetKey = "hiuna";
 let currentView = "list";
 let lastView = "list";
-let lastListScrollY = 0;
 let currentIndex = -1;
 let favCache = null;
+let activeItem = null;
 let isfavOutdated = true;
 let isFavPanelOpen = false;
-let isSideMenuOpen = false;
 let isSearchInputOpen = false;
-let isrestoreScroll = false;
 let isListDirty = false;
+const paragraph = [];
+let cSlide = 0;
 const DATASETS = {
   hiuna: Hiuna_Khomlui,
   khristen: Khristen_Madui_Lui,
@@ -22,106 +22,71 @@ const listEl = document.getElementById("songList");
 const detailEl = document.getElementById("songDetail");
 const viewNameEl = document.getElementById("viewName");
 const topLeftBtn = document.getElementById("topLeft");
-const topSearch = document.getElementById("top-search");
+const topSearch = document.getElementById("topRight");
 const searchInput = document.getElementById("searchInput");
 const searchOverlay = document.getElementById("searchOverlay");
 const searchListEl = document.getElementById("searchResults");
 const sideMenu = document.getElementById("sideMenu");
 const favPanel = document.getElementById("favPanel");
 const favList  = document.getElementById("favList");
+const projection  = document.getElementById("projectionView");
 /* ========= VIEW HANDLERS ========= */
+function setActiveItem(el) {
+  if (activeItem) activeItem.classList.remove("active");
+if (!el) { activeItem = null;
+    return;  }
+  el.classList.add("active");
+  activeItem = el;
+}
 function updateFavStar(index) {
   const star = document.getElementById("favStar");  if (!star) return;
   const favs = readFav()[currentDatasetKey] || [];
   star.textContent = favs.includes(index) ? "⭐" : "☆";
 }
-function closeFavouritePanel() { favPanel.style.bottom = "-50vh";
+function closeFavouritePanel() { favPanel.classList.remove("open");
 isFavPanelOpen = false;
 } 
-function openFavouriteView(event) { if (isFavPanelOpen){ closeFavouritePanel(); clearSideMenuActive(); return;
-  }
-  clearSideMenuActive();
-event.currentTarget?.classList.add("active");
+function favouriteBtn(event) { if (isFavPanelOpen) { closeFavouritePanel(); setActiveItem(null); 
+return; }
+  setActiveItem(event.currentTarget);
  openFavouritePanel();
 }
-function updateTopLeftButton() {
+function handleTopLeftClick() { clearSearch(); 
   if (currentView === "detail") {
-    topLeftBtn.textContent = "〈 ";
-updateFavStar(currentIndex);
-  } else {
-    topLeftBtn.textContent = "☰";
-  }}
-function handleTopLeftClick() {
-  if (currentView === "detail") {
-    clearSearch();
-    backToListView();
-  } else {
-    if (isSideMenuOpen) {
-      closeSideMenu();
-    } else {
-      openSideMenu();
-    }  } }
-function openSideMenu() {
-  sideMenu.style.left = "0px";
-isSideMenuOpen = true; clearSearch(); }
-function closeSideMenu() {
-  sideMenu.style.left = "-18rem";
-isSideMenuOpen = false;
-}
-function clearSideMenuActive() {
-document.querySelectorAll(".side-item").forEach(i =>
-    i.classList.remove("active") );
-}
+    closeDetail(); } 
+else { sideMenu.classList.toggle("open"); }
+ }
 function clearSearch() {
   searchInput.value = "";
-  searchOverlay.style.display = "none";
+  searchOverlay.classList.remove("open");
   searchListEl.innerHTML = "";
 }
-function openSearch() { closeFavouritePanel();
- searchOverlay.style.display = "block";
-  searchInput.style.display = "block";
+function openSearch() { 
+searchOverlay.classList.add("open");
+searchInput.classList.add("open");
   topSearch.textContent = "⌫";
 isSearchInputOpen = true;
+history.pushState(null, "");
   searchInput.focus();
 }
 function closeSearch() { clearSearch(); 
-  searchInput.style.display = "none";
+   searchInput.classList.remove("open");
    topSearch.textContent = "🔍";
   isSearchInputOpen = false;
 }
 function toggleSearch() { isSearchInputOpen?  closeSearch():
  openSearch();
   }
-function backToListView() { isrestoreScroll = true;
-  if (!isListDirty) { showListView();
-    return; }
-  if (lastView === "list") { renderSongList(baseSongs);  } 
-else { renderCategoryView(baseSongs); updateTopLeftButton(); }
+function closeDetail() {
+detailEl.style.display = "none";
+topLeftBtn.textContent = "☰"; 
+currentView = lastView; 
+if (isListDirty) {
+      if (lastView === "category") {
+    renderCategoryView(baseSongs);  } 
+else {  renderSongList(baseSongs); }
+isListDirty = false; } 
 }
-function showListView() { currentView = "list"; lastView = "list";
-  detailEl.style.display = "none";
-  listEl.style.display = "block";
-  updateTopLeftButton();
-if (isrestoreScroll) {
-    window.scrollTo(0, lastListScrollY);
-isrestoreScroll = false;}
-}
-function showDetailView() {
-  currentView = "detail";
-  listEl.style.display = "none";
-  detailEl.style.display = "block";
-  updateTopLeftButton();
- closeSideMenu();
-closeFavouritePanel();
-window.scrollTo(0, 0) ;
-}
-detailEl.addEventListener("click", e => {
-  const x = e.clientX; const y = e.clientY;
-  const w = window.innerWidth; const h = window.innerHeight;   
-if (y < h * 0.15 || y > h * 0.9 ) return;
-if (x < w * 0.26) showSongDetail(currentIndex - 1);
-  else if (x > w * 0.74) showSongDetail(currentIndex + 1);
-});
 function renderSongLine(song, index, favSet) {
   const isFav = favSet?.has(index);
  const star = isFav
@@ -193,22 +158,22 @@ function openFavouritePanel() {
 const li = document.createElement("li");
     li.innerHTML = renderSongLine(song);
   li.onclick = () => {  switchDataset(dataset);
-      showSongDetail(index);
+    showSongDetail(song, index);
     };
  fragment.appendChild(li); });
  favList.innerHTML = "";
   favList.appendChild(fragment);
-  favPanel.style.bottom = "0";
+  favPanel.classList.add("open");
 isFavPanelOpen = true;
+history.pushState(null, "");
 }
 /* ======== DATASET ======== */
 function activateDataset(key, view = "list") {
-  closeSideMenu();
+  sideMenu.classList.remove("open");
   clearSearch(); 
   currentDatasetKey = key;
   baseSongs = DATASETS[key];
   currentView = view;
-
   viewNameEl.textContent =
     key === "hiuna" ? "Hiuna Khomlui" :
     key === "khristen" ? "Khristen Madui Lui" :
@@ -220,41 +185,45 @@ function activateDataset(key, view = "list") {
   } else {
     renderSongList(baseSongs);}
 }
-function switchDataset(key) { 
+function switchDataset(key, event) { 
 if (key === currentDatasetKey && currentView === "detail") {
-    backToListView(); return; }
-clearSideMenuActive();   activateDataset(key, "list");
+    closeDetail(); return; }
+setActiveItem(event?.currentTarget);
+detailEl.style.display = "none";
+ activateDataset(key, "list");
 }
-function openCategoryView(datasetKey, event) {  clearSideMenuActive(); 
+function openCategoryView(key, event) {  setActiveItem(event.currentTarget);
 closeFavouritePanel();
-event.currentTarget?.classList.add("active"); window.scrollTo(0, 0) ;
-  activateDataset(datasetKey, "category");
+ window.scrollTo(0, 0);
+  activateDataset(key, "category");
 }
 /* ========= SEARCH ========= */
-searchInput.addEventListener("input", () => {
-  const q = searchInput.value.trim().toLowerCase();
+function normalize(str) {  return (str || "")
+    .toLowerCase()
+    .replace(/[ !,.?-']/g, "");
+}
+searchInput.addEventListener("input", () => { const q = normalize(searchInput.value);
 
   if (q === "") {
-    clearSearch();
+searchOverlay.classList.remove("open");
        return; }
-
   const matches = baseSongs
     .map((song, index) => ({ song, index }))
     .filter(({ song }) =>
       song.ID.toString().includes(q) ||
-      (song.Title || "").toLowerCase().includes(q) ||  (song.Translation || "").toLowerCase().includes(q)
+      normalize(song.Title).includes(q) || 
+       normalize(song.Translation).includes(q)
     );
-
   renderSearchResults(matches);
-  searchOverlay.style.display = "block";
+ searchOverlay.classList.add("open");
 });
 function renderSearchResults(results) {
   const fragment = document.createDocumentFragment();
 const favSet = new Set(readFav()[currentDatasetKey] || []);
   results.forEach(({ song, index }) => { const li = document.createElement("li");
     li.innerHTML = renderSongLine(song, index, favSet);
-    li.onclick = () => { clearSearch();  
-      showSongDetail(index);
+    li.onclick = () => { closeSearch();  
+      showSongDetail(song, index);
     };
     fragment.appendChild(li);  });
 searchListEl.innerHTML = "";
@@ -271,8 +240,8 @@ function groupByCategory(songs) {  const map = {};
 }
 function renderCategoryView(songs) {
   currentView = "category"; lastView = "category";
+history.pushState(null, "");
   listEl.innerHTML = "";
-  detailEl.style.display = "none";
   listEl.style.display = "block";
 const grouped = groupByCategory(songs);
   const mainFragment = document.createDocumentFragment();
@@ -287,9 +256,7 @@ const containerFragment = document.createDocumentFragment();
 grouped[category].forEach(({ song, index }) => {
       const li = document.createElement("li");
       li.innerHTML = renderSongLine(song, index, favSet);
-   li.onclick = () => { lastListScrollY = window.scrollY;
-        showSongDetail(index);
-      };
+   li.onclick = () =>   showSongDetail(song, index);
 containerFragment.appendChild(li);
     });
 container.appendChild(containerFragment);
@@ -306,38 +273,128 @@ function renderSongList(songArray) { const fragment = document.createDocumentFra
 const favSet = new Set(readFav()[currentDatasetKey] || []);
 songArray.forEach((song, index) => { const li = document.createElement("li");
     li.innerHTML = renderSongLine(song, index, favSet);
-    li.onclick = () => { lastListScrollY = window.scrollY;
-      showSongDetail(index);
-    };
+    li.onclick = () =>     showSongDetail(song, index);
     fragment.appendChild(li);
   });
  listEl.innerHTML = "";
   listEl.appendChild(fragment);
- showListView();
-}
+ currentView = "list"; lastView = "list";
+  listEl.style.display = "block";
+} 
 /* ========= DETAIL ========= */
-function showSongDetail(index) { 
-  const song = baseSongs[index];
+const DETAIL_ORDER = [
+  ["V1", "CH-"], ["CH", "V1-"], ["V2", "V2-"],["V3", "V3-"],  ["V4", "V4-"], ["V5", "V5-"], ["V6", "V6-"], ["V7", "V7-"],  ["V8", "V8-"], ["V9", "V9-"], ["V10", "V10-"], ["V11", "V11-"] ];
+function showSongDetail(song, index) {  
   if (!song) return;
+history.pushState(null, "");
 currentIndex = index;
   const translationBlock = song.Translation
     ? `<div class="translation">${song.Translation}</div>`
     : "";
+const lyricsParts = [];
+for (const [a,b] of DETAIL_ORDER) {
+  const key = song[a] ? a : song[b] ? b : null;
+  if (!key) continue;
+  lyricsParts.push(`<div class="lyrics">${song[key]}</div>`);}
+const lyricsBlock = lyricsParts.join("");
+
  detailEl.innerHTML = `
   <div class="detail-head">
     <div> <span id="favStar" onclick="toggleFav(${index})">☆</span> <span>${song.ID}</span> </div>
   <div>${song.Title}</div>
   </div>
     ${translationBlock}
-    <p><strong>Key:</strong> ${song.Key || "⚪"}</p>
-    <p><strong>Time signature:</strong> ${song["Time signature"] || "⚪"}</p>
-    <div class="lyrics">${song.Lyrics}</div>
+    <p class="song-meta"><strong>Key:</strong> ${song.Key || "⚪"}</p>
+    <p class="song-meta"><strong>Time signature:</strong> ${song["Time signature"] || "⚪"}</p>
+    <div>${lyricsBlock}</div>
   `;
-showDetailView();
+  currentView = "detail";
+  detailEl.style.display = "block";
+  topLeftBtn.textContent = "〈 ";
+updateFavStar(currentIndex); 
+ sideMenu.classList.remove("open");
+closeFavouritePanel();
+detailEl.scrollTo(0, 0) ;
+}
+detailEl.addEventListener("click", e => {
+  const x = e.clientX; const y = e.clientY;
+  const w = window.innerWidth; const h = window.innerHeight;   
+if (y < h * 0.15 || y > h * 0.9 ) return;
+if (x < w * 0.24)
+{const newIndex = currentIndex - 1;
+showSongDetail(baseSongs[newIndex], newIndex); }
+  else if (x > w * 0.76) 
+{const newIndex = currentIndex + 1;
+showSongDetail(baseSongs[newIndex], newIndex); }
+});
+detailEl.addEventListener("dblclick", e => { openProjection(baseSongs[currentIndex]);
+}); 
+/* ========= PROJECTION ========= */
+const PROJECTION_ORDER = [
+  ["V1", "CH-"],  ["CH", "V1-"],  ["V2", "CH-"],
+ ["CH", "V2-"], ["V3", "CH-"], ["CH", "V3-"],
+["V4", "CH-"], ["CH", "V4-"],  ["V5", "CH-"], ["CH", "V5-"], ["V6", "CH-"],  ["CH", "V6-"], ["V7",  "CH-"], ["CH",  "V7-"], ["V8",  "CH-"], ["CH",  "V8-"], ["V9",  "CH-"], ["CH",  "V9-"],["V10", "CH-"], ["CH",  "V10-"], ["V11", "CH-"], ["CH",  "V11-"] ];
+function openProjection(song) { projection.style.display = "block"; 
+currentView = "project";
+history.pushState(null, "");
+let useA = null;
+paragraph.length = 0;
+cSlide = 0;
+for (const [a, b] of PROJECTION_ORDER) {
+  if (useA === null) { if (song[a]) useA = true;
+    else if (song[b]) useA = false;  
+else continue; }
+  const key = useA ? a : b;
+  if (!song[key]) {
+  if (key.startsWith("CH")) continue;
+  break;}
+ paragraph.push(`<div class="lyrics">${song[key]}</div>`);
+} 
+paragraph[paragraph.length - 1] +=
+  `<div class="pCloseSlide" onclick="closeProjection()">❌</div>`;
+projection.innerHTML = paragraph[cSlide];
+}
+function closeProjection() { document.exitFullscreen(); 
+projection.style.display = "none";
+currentView = "detail";
+}
+projection.addEventListener("click", e => {
+  if (e.clientX < window.innerWidth * 0.26) prevSlide();
+  else if (e.clientX > window.innerWidth * 0.74) nextSlide();
+});
+document.addEventListener("keydown", e => { 
+if (e.target === searchInput) return;
+if (e.key === "Enter" && (currentView === "detail" || currentView === "project")) { openProjection(baseSongs[currentIndex]);
+projection.requestFullscreen(); return; }
+ if (currentView !== "project") return;
+ if (e.key === "ArrowDown" || e.key === "ArrowRight" || e.key === " ") nextSlide();
+ else if (e.key === "ArrowUp" || e.key === "ArrowLeft") prevSlide();
+else if (e.key === "Escape") 
+ closeProjection(); 
+});
+function nextSlide() { 
+if (cSlide === paragraph.length - 1) { projection.scrollBy(0, 500); return; } 
+projection.innerHTML = paragraph[++cSlide];
+projection.scrollTo(0, 34);
+}
+function prevSlide() {
+  if (cSlide === 0) { closeProjection(); return; }
+  projection.innerHTML = paragraph[--cSlide];
 }
 /* ========= BOOT ========= */
-switchDataset("hiuna");
+activateDataset(currentDatasetKey);
+
+window.addEventListener("popstate", () => {
+if (isSearchInputOpen) { 
+closeSearch(); }
+ else if (isFavPanelOpen) {
+    closeFavouritePanel();
+    setActiveItem(null); }
+ else if (currentView === "project") {  closeProjection(); }  
+  else if (currentView === "detail") {  closeDetail(); } 
+ else if (currentView === "category") { activateDataset(currentDatasetKey, "list"); }  
+} );
 /* ========= PWA ========= */
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => { navigator.serviceWorker.register("./sw.js"); });
-}
+    }
