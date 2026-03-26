@@ -200,7 +200,7 @@ closeFavouritePanel();
 /* ========= SEARCH ========= */
 function normalize(str) {  return (str || "")
     .toLowerCase()
-    .replace(/[ !,.?-']/g, "");
+    .replace(/[ !,.?'-]/g, "");
 }
 searchInput.addEventListener("input", () => { const q = normalize(searchInput.value);
 
