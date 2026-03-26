@@ -190,6 +190,7 @@ if (key === currentDatasetKey && currentView === "detail") {
     closeDetail(); return; }
 setActiveItem(event?.currentTarget);
 detailEl.style.display = "none";
+topLeftBtn.textContent = "☰"; 
  activateDataset(key, "list");
 }
 function openCategoryView(key, event) {  setActiveItem(event.currentTarget);
@@ -394,3 +395,7 @@ closeSearch(); }
   else if (currentView === "detail") {  closeDetail(); } 
  else if (currentView === "category") { activateDataset(currentDatasetKey, "list"); }  
 } );
+/* ========= PWA ========= */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => { navigator.serviceWorker.register("./sw.js"); });
+      }
