@@ -1,0 +1,19 @@
+.search-input {
+  display: block;
+
+  width: min(90%, 600px);
+  margin: var(--space-md) auto;
+
+  padding: 0.75rem var(--space-md);
+
+  font-size: var( --font-medium);
+
+  border: 1px solid #ddd;
+  border-radius:  var(--space-sm);
+
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #999;
+}

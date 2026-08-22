@@ -1,0 +1,33 @@
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list li {
+  padding: 0.65rem 0.7rem;
+  font-size: var( --font-medium);
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.list li:hover {
+  background: #d1d2db;
+}
+
+.id {
+  font-weight: var( --font-weight-bold);
+  margin-right:  var(--space-sm);
+}
+
+.favourite {
+  margin-left:  var(--space-sm);
+}
+
+.translation {
+  padding-top: var(--space-xs);
+  text-align: center;
+  font-size: var( --font-small);
+  font-style: italic;
+  opacity: 0.9;
+}

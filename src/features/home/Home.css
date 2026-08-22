@@ -1,0 +1,34 @@
+.home {
+  min-height: 100dvh;
+  padding: 2rem 1rem;
+}
+
+.home-title {
+  text-align: center;
+}
+
+.home-subtitle {
+  margin-top: 2rem;
+}
+
+.home-collections {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.home-collections button,
+.home-favourites {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  text-align: left;
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.home-favourites {
+  margin-top: 2rem;
+}

@@ -1,0 +1,18 @@
+:root {
+  --font-small: 0.875rem;
+  --font-medium: 1.25rem;
+  --font-large: 1.6rem;
+  --font-title: 2rem;
+
+  --font-weight-bold: 700;
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+
+   --top-bar-height: 3.3rem;
+   --bottom-bar-height: 4rem;
+   --top-bar-side-width: 4.5rem;
+}

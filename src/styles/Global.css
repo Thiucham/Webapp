@@ -1,0 +1,22 @@
+html {
+  font-size: clamp(14px, 1.5vw, 18px);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+
+  font-family: "Open Sans", sans-serif;
+
+  background: #fff;
+  color: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
