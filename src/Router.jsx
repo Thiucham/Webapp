@@ -64,6 +64,10 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+],
+
+  {
+    basename: "/Webapp",
+  });
 
 export default router;
