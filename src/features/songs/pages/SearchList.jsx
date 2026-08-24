@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  useParams,
   useNavigate,
+  useParams,
 } from "react-router-dom";
 
 import useKeyboardNavigation from "../hooks/useKeyboardNavigation";
@@ -33,8 +33,8 @@ export default function SearchList() {
     async function loadSongs() {
       try {
         const response = await fetch(
-  `${import.meta.env.BASE_URL}data/${collection}.json`
-);
+          `${import.meta.env.BASE_URL}data/${collection}.json`
+        );
 
         if (!response.ok) {
           throw new Error("Failed to load songs");
@@ -52,8 +52,8 @@ export default function SearchList() {
   }, [collection]);
 
   useEffect(() => {
-  setSelectedIndex(0);
-}, [query]);
+    setSelectedIndex(0);
+  }, [query]);
 
   const normalizedQuery = normalize(query);
 
@@ -66,26 +66,24 @@ export default function SearchList() {
           normalize(song.Translation).includes(normalizedQuery)
         );
 
-      function openSelectedSong() {
-  const song = results[selectedIndex];
+  function openSelectedSong() {
+    const song = results[selectedIndex];
 
-  if (!song) return;
+    if (!song) return;
 
-  const index = songs.indexOf(song);
+    navigate(`${song.ID}`, {
+      state: {
+        song,
+        songs: results,
+        index: selectedIndex,
+        collection,
+      },
+    });
+  }
 
-  navigate(`${song.ID}`, {
-    state: {
-      song,
-      songs: results,
-      index: selectedIndex,
-      collection,
-    },
+  useKeyboardNavigation({
+    onEnter: openSelectedSong,
   });
-}
-
-useKeyboardNavigation({
-  onEnter: openSelectedSong,
-});
 
   return (
     <main>
@@ -98,12 +96,11 @@ useKeyboardNavigation({
         placeholder="Search"
       />
 
-     <List
-  songs={results}
-  collection={collection}
-  onSelect={setSelectedIndex}
-/>
+      <List
+        songs={results}
+        collection={collection}
+        onSelect={setSelectedIndex}
+      />
     </main>
   );
 }
-

@@ -3,7 +3,7 @@ import { useRef } from "react";
 export default function useSwipe({
   onSwipeLeft,
   onSwipeRight,
-  threshold = 130,
+  threshold = 140,
 }) {
   const startX = useRef(null);
 

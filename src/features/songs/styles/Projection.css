@@ -38,9 +38,11 @@
   align-items: center;
   justify-content: center;
   padding: var(--space-xl);
+   overflow-y: auto;
 }
 
 .projection-slide .lyrics {
+  margin: auto 0;
   white-space: pre-line;
   font-size: var(--font-title);
   line-height: 1.6;

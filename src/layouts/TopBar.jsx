@@ -39,6 +39,7 @@ const title = collection || "THIUCHAM";
   {title}
 </div>
 
+{!isFavourites && (
          <button
   className="top-right"
   onClick={() => {
@@ -51,6 +52,7 @@ const title = collection || "THIUCHAM";
 >
   {isSearchPage ? "✕" : "🔍"}
 </button>
+)}
 
       </header>
 

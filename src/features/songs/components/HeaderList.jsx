@@ -46,7 +46,7 @@ useKeyboardNavigation({
 });
 
   return (
-    <main  style={{ paddingLeft: "1rem" }} >
+    <main>
       {Object.entries(groups).map(
         ([group, data]) => {
           const isOpen = openGroup === group;
@@ -63,7 +63,7 @@ useKeyboardNavigation({
               <div
                 onClick={() => toggleGroup(group)}
               >
-                <h3>
+                <h3 style={{ paddingLeft: "1rem" }}>
                   {group} ({songs.length})
                 </h3>
               </div>
