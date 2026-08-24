@@ -3,6 +3,7 @@ import { useRef } from "react";
 export default function useSwipe({
   onSwipeLeft,
   onSwipeRight,
+  threshold = 130,
 }) {
   const startX = useRef(null);
 
@@ -16,8 +17,6 @@ export default function useSwipe({
     const endX = event.changedTouches[0].clientX;
 
     const distance = endX - startX.current;
-
-    const threshold = 70;
 
     if (distance < -threshold) {
       onSwipeLeft();

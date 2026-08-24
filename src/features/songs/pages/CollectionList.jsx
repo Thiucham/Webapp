@@ -25,8 +25,8 @@ export default function CollectionList() {
     async function loadSongs() {
       try {
         const response = await fetch(
-  `${import.meta.env.BASE_URL}data/${collection}.json`
-);
+          `${import.meta.env.BASE_URL}data/${collection}.json`
+        );
 
         if (!response.ok) {
           throw new Error("Failed to load songs");
@@ -44,60 +44,62 @@ export default function CollectionList() {
   }, [collection]);
 
   function nextCollection() {
-     if (!songs.length) return;
+    if (!songs.length) return;
 
-  const currentIndex = COLLECTIONS.indexOf(collection);
+    const currentIndex =
+      COLLECTIONS.indexOf(collection);
 
-  const nextIndex =
-    (currentIndex + 1) % 3;
+    const nextIndex =
+      (currentIndex + 1) % 3;
 
-  navigate(`/${COLLECTIONS[nextIndex]}`);
-}
+    navigate(`/${COLLECTIONS[nextIndex]}`);
+  }
 
-function previousCollection() {
-   if (!songs.length) return;
+  function previousCollection() {
+    if (!songs.length) return;
 
-  const currentIndex = COLLECTIONS.indexOf(collection);
+    const currentIndex =
+      COLLECTIONS.indexOf(collection);
 
-  const previousIndex =
-    (currentIndex - 1 + 3) % 3;
+    const previousIndex =
+      (currentIndex - 1 + 3) % 3;
 
-  navigate(`/${COLLECTIONS[previousIndex]}`);
-}
+    navigate(`/${COLLECTIONS[previousIndex]}`);
+  }
 
-function openSelectedSong() {
-  const song = songs[selectedIndex];
+  function openSelectedSong() {
+    const song = songs[selectedIndex];
 
-  if (!song) return;
+    if (!song) return;
 
-  navigate(`${song.ID}`, {
-    state: {
-      song,
-      songs,
-      index: selectedIndex,
-      collection,
-    },
+    navigate(`${song.ID}`, {
+      state: {
+        song,
+        songs,
+        index: selectedIndex,
+        collection,
+      },
+    });
+  }
+
+  useKeyboardNavigation({
+    onNext: nextCollection,
+    onPrevious: previousCollection,
+    onEnter: openSelectedSong,
   });
-}
-
-useKeyboardNavigation({
-  onNext: nextCollection,
-  onPrevious: previousCollection,
-  onEnter: openSelectedSong,
-});
 
   const swipeHandlers = useSwipe({
-  onSwipeLeft: nextCollection,
-  onSwipeRight: previousCollection,
-});
+    onSwipeLeft: nextCollection,
+    onSwipeRight: previousCollection,
+  });
 
- return (
-  <main {...swipeHandlers}>
-    <List
-      songs={songs}
-      collection={collection}
-      onSelect={setSelectedIndex}
-    />
-  </main>
-);
+  return (
+    <main {...swipeHandlers}>
+      <List
+        songs={songs}
+        collection={collection}
+        onSelect={setSelectedIndex}
+      />
+    </main>
+  );
 }

@@ -1,12 +1,21 @@
 import { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import {
+  NavLink,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 import "./styles/TopBar.css";
 
 export default function TopBar() {
   const location = useLocation();
+  const navigate = useNavigate();
 
-const collection = location.pathname.split("/")[1];
+const path = location.pathname.split("/");
+const collection = path[1];
+const isSearchPage = path[2] === "search";
+const isFavourites = collection === "Favourites";
+
 const title = collection || "THIUCHAM";
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,10 +39,17 @@ const title = collection || "THIUCHAM";
   {title}
 </div>
 
-         <button className="top-right">
-  <NavLink to={`/${collection}/search`}>
-    🔍
-  </NavLink>
+         <button
+  className="top-right"
+  onClick={() => {
+    navigate(
+      isSearchPage
+        ? `/${collection}`
+        : `/${collection}/search`
+    );
+  }}
+>
+  {isSearchPage ? "✕" : "🔍"}
 </button>
 
       </header>

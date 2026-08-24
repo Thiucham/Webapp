@@ -100,6 +100,7 @@ useKeyboardNavigation({
 const swipeHandlers = useSwipe({
   onSwipeLeft: nextSong,
   onSwipeRight: previousSong,
+   threshold: 115,
 });
 
 useEffect(() => {

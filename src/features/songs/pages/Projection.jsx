@@ -103,6 +103,7 @@ export default function Projection() {
   const swipeHandlers = useSwipe({
   onSwipeLeft: nextSlide,
   onSwipeRight: previousSlide,
+  threshold: 50,
 });
 
   return (
