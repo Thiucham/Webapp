@@ -2,14 +2,12 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import {
-  useEffect,
-  useState,
-} from "react";
+import { useState } from "react";
+
+import { useFavourites } from "../../../contexts/FavouritesProvider";
 
 import useSwipe from "../hooks/useSwipe";
 import useKeyboardNavigation from "../hooks/useKeyboardNavigation";
-import useFavourites from "../hooks/useFavourites";
 
 import "../styles/Details.css";
 
@@ -44,14 +42,14 @@ const collection = location.state?.collection;
    const {
   isFavourite,
   toggleFavourite,
-} = useFavourites(collection);
+} = useFavourites();
 
   function closeDetails() {
     navigate(-1);
   }
 
   function openProjection() {
-  navigate("/projection", {
+  navigate("../projection", {
     state: { song },
   });
 }
@@ -97,15 +95,17 @@ useKeyboardNavigation({
   onEnter: openProjection,
 });
 
-const swipeHandlers = useSwipe({
+const {
+  onTouchStart,
+  onTouchMove,
+  onTouchEnd,
+  offsetX,
+  isDragging,
+} = useSwipe({
   onSwipeLeft: nextSong,
   onSwipeRight: previousSong,
-   threshold: 115,
+  threshold: 115,
 });
-
-useEffect(() => {
-  window.scrollTo(0, 0);
-}, [song.ID]);
 
   return (
     <>
@@ -115,17 +115,48 @@ useEffect(() => {
       >
         〈
       </button>
+
+      {showHelp && (
+  <div className="help-overlay">
+    <div className="help-box">
+      <button onClick={() => setShowHelp(false)}>
+        ❌
+      </button>
+
+      <h4>Controls</h4>
+
+      <p>Swipe left — Next song</p>
+      <p>Swipe right — Previous song</p>
+
+      <p>→ / ↓ / Space — Next song</p>
+      <p>← / ↑ — Previous song</p>
+
+      <p>Double-click lyrics — Projection</p>
+      <p>Esc — Close</p>
+    </div>
+  </div>
+)}
+
+      <div className="details-scroll">
     <main
   className="details"
-  {...swipeHandlers}
+  onTouchStart={onTouchStart}
+  onTouchMove={onTouchMove}
+  onTouchEnd={onTouchEnd}
+  style={{
+    transform: `translateX(${offsetX}px)`,
+    transition: isDragging
+      ? "none"
+      : "transform 0.35s ease",
+  }}
 >
       <div className="detail-head">
         <div>
          <button
   className="favourite"
-  onClick={() => toggleFavourite(song.ID)}
+  onClick={() => toggleFavourite(collection, song.ID)}
 >
-  {isFavourite(song.ID) ? "⭐" : "☆"}
+  {isFavourite(collection, song.ID) ? "⭐" : "☆"}
 </button>
 
           <span>
@@ -168,27 +199,6 @@ useEffect(() => {
   </div>
 </div>
 
-{showHelp && (
-  <div className="help-overlay">
-    <div className="help-box">
-      <button onClick={() => setShowHelp(false)}>
-        ❌
-      </button>
-
-      <h4>Controls</h4>
-
-      <p>Swipe left — Next song</p>
-      <p>Swipe right — Previous song</p>
-
-      <p>→ / ↓ / Space — Next song</p>
-      <p>← / ↑ — Previous song</p>
-
-      <p>Double-click lyrics — Projection</p>
-      <p>Esc — Close</p>
-    </div>
-  </div>
-)}
-
       <div className="lyrics-container"
       onDoubleClick={openProjection}
       >
@@ -213,6 +223,7 @@ useEffect(() => {
         })}
       </div>
     </main>
-    </>
+     </div>
+     </>
   );
 }

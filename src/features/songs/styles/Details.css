@@ -1,5 +1,18 @@
+.details-scroll {
+  position: fixed;
+  inset: 0;
+
+  background: #fff;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+}
+
 .details {
-  padding: 0.2rem 1rem 6rem ;
+  min-height: 100%;
+  padding: 3.8rem 1rem 6.5rem;
+  touch-action: pan-y;
 }
 
 .details-close {
@@ -18,7 +31,7 @@
 
   cursor: pointer;
 
-  z-index: 2100;
+  z-index: 1100;
 }
 
 .detail-head {
@@ -87,7 +100,7 @@
   justify-content: center;
   background: rgba(0, 0, 0, 0.35);
 
-  z-index: 200;
+  z-index: 100;
 }
 
 .help-box {

@@ -7,21 +7,21 @@ export default function BottomBar() {
     <nav className="bottom-bar">
 
       <NavLink
-        to="/Hiuna-Khomlui"
+        to="/Hiuna-Khomlui/list"
         className="bottom-item"
       >
         Hiuna Khomlui
       </NavLink>
 
       <NavLink
-        to="/Khristen-Madui-Lui"
+        to="/Khristen-Madui-Lui/list"
         className="bottom-item"
       >
         Khristen Madui Lui
       </NavLink>
 
       <NavLink
-        to="/Luisan"
+        to="/Luisan/list"
         className="bottom-item"
       >
         Luisan

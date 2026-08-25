@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import useFavourites from "../hooks/useFavourites";
+import { useFavourites } from "../../../contexts/FavouritesProvider";
 
 import "../styles/List.css";
 
@@ -12,7 +12,7 @@ export default function List({
   const navigate = useNavigate();
 
   const { isFavourite } =
-    useFavourites(collection);
+    useFavourites();
 
   function openDetails(song, index) {
     navigate(`${song.ID}`, {
@@ -41,7 +41,7 @@ export default function List({
             {song.Title}
           </span>
 
-          {isFavourite(song.ID) && (
+          {isFavourite(collection, song.ID) && (
             <span className="favourite">
               ⭐
             </span>

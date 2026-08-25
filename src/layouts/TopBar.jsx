@@ -45,7 +45,7 @@ const title = collection || "THIUCHAM";
   onClick={() => {
     navigate(
       isSearchPage
-        ? `/${collection}`
+        ? `/${collection}/list`
         : `/${collection}/search`
     );
   }}

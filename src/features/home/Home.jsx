@@ -12,11 +12,11 @@ export default function Home() {
       <p className="home-subtitle">Choose a collection</p>
 
       <div className="home-collections">
-        <button onClick={() => navigate("/Hiuna-Khomlui")}>
+        <button onClick={() => navigate("/Hiuna-Khomlui/list")}>
           ▸ Hiuna Khomlui
         </button>
 
-        <button onClick={() => navigate("/Khristen-Madui-Lui")}>
+        <button onClick={() => navigate("/Khristen-Madui-Lui/list")}>
           ▸ Khristen Madui Lui
         </button>
 

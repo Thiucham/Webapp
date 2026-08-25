@@ -100,22 +100,32 @@ export default function Projection() {
    mode: "projection",
 });
 
-  const swipeHandlers = useSwipe({
+  const {
+  onTouchStart,
+  onTouchMove,
+  onTouchEnd,
+  offsetX,
+  isDragging,
+} = useSwipe({
   onSwipeLeft: nextSlide,
   onSwipeRight: previousSlide,
   threshold: 50,
 });
 
   return (
-    <div className="projection"
-      {...swipeHandlers}
-      >
-      <div
-        className="projection-track"
-        style={{
-          transform: `translateX(-${currentSlide * 100}%)`,
-        }}
-      >
+    <div className="projection">
+     <div
+  className="projection-track"
+  onTouchStart={onTouchStart}
+  onTouchMove={onTouchMove}
+  onTouchEnd={onTouchEnd}
+  style={{
+    transform: `translateX(calc(-${currentSlide * 100}% + ${offsetX}px))`,
+    transition: isDragging
+      ? "none"
+      : "transform 0.35s ease",
+  }}
+>
         {lyrics.map((lyric, index) => (
           <div
             key={index}

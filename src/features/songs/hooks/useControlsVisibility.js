@@ -1,21 +1,26 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function useControlsVisibility() {
   const [showControls, setShowControls] = useState(true);
-
-  useEffect(() => {
-    if (!showControls) return;
-
-    const timer = setTimeout(() => {
-      setShowControls(false);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [showControls]);
+  const timer = useRef(null);
 
   function show() {
+    if (showControls) {
+      clearTimeout(timer.current);
+      setShowControls(false);
+      return;
+    }
+
     setShowControls(true);
+
+    timer.current = setTimeout(() => {
+      setShowControls(false);
+    }, 3000);
   }
+
+  useEffect(() => {
+    return () => clearTimeout(timer.current);
+  }, []);
 
   return {
     showControls,

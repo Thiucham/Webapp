@@ -52,7 +52,7 @@ export default function CollectionList() {
     const nextIndex =
       (currentIndex + 1) % 3;
 
-    navigate(`/${COLLECTIONS[nextIndex]}`);
+    navigate(`/${COLLECTIONS[nextIndex]}/list`);
   }
 
   function previousCollection() {
@@ -64,7 +64,7 @@ export default function CollectionList() {
     const previousIndex =
       (currentIndex - 1 + 3) % 3;
 
-    navigate(`/${COLLECTIONS[previousIndex]}`);
+    navigate(`/${COLLECTIONS[previousIndex]}/list`);
   }
 
   function openSelectedSong() {

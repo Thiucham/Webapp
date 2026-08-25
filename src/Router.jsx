@@ -1,73 +1,95 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import AppLayout from "./layouts/AppLayout.jsx";
+import CollectionShell from "./layouts/CollectionShell.jsx";
+import CategoriesShell from "./layouts/CategoriesShell.jsx";
+import SearchShell from "./layouts/SearchShell.jsx";
+import FavouritesShell from "./layouts/FavouritesShell.jsx";
 
-import CategoriesList from "./features/songs/pages/CategoriesList.jsx";
-import Favourites from "./features/songs/pages/Favourites.jsx";
-import SearchList from "./features/songs/pages/SearchList.jsx";
+import { FavouritesProvider } from "./contexts/FavouritesProvider.jsx";
+
 import Home from "./features/home/Home.jsx";
-import CollectionList from "./features/songs/pages/CollectionList.jsx";
 import Details from "./features/songs/pages/Details.jsx";
 import Projection from "./features/songs/pages/Projection.jsx";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "projection",
-    element: <Projection />,
-  },
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Home />,
+    },
 
-  {
-    element: <AppLayout />,
-    children: [
-      {
-        path: ":collection",
-        children: [
-          {
-            index: true,
-            element: <CollectionList />,
-          },
+    {
+      element: (
+        <FavouritesProvider>
+          <AppLayout />
+        </FavouritesProvider>
+      ),
+      children: [
+        {
+          path: ":collection/list",
+          element: <CollectionShell />,
+          children: [
+            {
+              path: ":songId",
+              element: <Details />,
+            },
+            {
+             path: "projection",
+             element: <Projection />,
+            },
+          ],
+        },
 
-          {
-            path: "categories",
-            element: <CategoriesList />,
-          },
+        {
+          path: ":collection/categories",
+          element: <CategoriesShell />,
+          children: [
+            {
+              path: ":songId",
+              element: <Details />,
+            },
+            {
+             path: "projection",
+             element: <Projection />,
+            },
+          ],
+        },
 
-          {
-            path: "search",
-            element: <SearchList />,
-          },
-
-          {
-            path: ":songId",
-            element: <Details />,
-          },
-
-          {
-            path: "search/:songId",
-            element: <Details />,
-          },
-
-          {
-            path: "categories/:songId",
-            element: <Details />,
-          },
-        ],
-      },
-
-      {
-        path: "Favourites",
-        element: <Favourites />,
-      },
-    ],
-  },
-],
-
+        {
+          path: ":collection/search",
+          element: <SearchShell />,
+          children: [
+            {
+              path: ":songId",
+              element: <Details />,
+            },
+            {
+             path: "projection",
+             element: <Projection />,
+            },
+          ],
+        },
+        {
+          path: "Favourites",
+          element: <FavouritesShell />,
+          children: [
+            {
+              path: ":songId",
+              element: <Details />,
+            },
+            {
+             path: "projection",
+             element: <Projection />,
+            },
+          ],
+        },
+      ],
+    },
+  ],
   {
     basename: "/Webapp",
-  });
+  }
+);
 
 export default router;
