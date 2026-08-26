@@ -124,13 +124,15 @@ const {
 
       <h4>Controls</h4>
 
+      <h5>Touch</h5>
       <p>Swipe left — Next song</p>
       <p>Swipe right — Previous song</p>
-
-      <p>→ / ↓ / Space — Next song</p>
-      <p>← / ↑ — Previous song</p>
-
       <p>Double-click lyrics — Projection</p>
+
+      <h5>Keyboard</h5>
+      <p>→ — Next song</p>
+      <p>← — Previous song</p>
+      <p>Enter — Projection</p>
       <p>Esc — Close</p>
     </div>
   </div>
