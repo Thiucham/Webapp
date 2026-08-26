@@ -11,5 +11,4 @@ import "./styles/Global.css";
 createRoot(document.getElementById("root")).render(
     <RouterProvider router={router} />
 );
-
-
+registerSW({ immediate: true });
