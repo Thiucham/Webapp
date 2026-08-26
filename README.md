@@ -1,40 +1,64 @@
-**Thiucham Web App**
+# Thiucham Web App
 
-- Type: Progressive Web App (PWA), Single Page Application (SPA - DOM)
-- Started: 14 August 2024  
-- First Release: 30 October 2024 (AppSheet)  
-- Web Version Launch: January 2026 
-- Latest Update: 26th March 2026
+A Progressive Web App (PWA) for Liangmai song lyrics, covering **Hiuna Khomlui**, **Khristen Madui Lui**, and **Luisan**.
 
-**Overview**
+Thiucham is designed for both mobile and desktop, with touch gestures, keyboard navigation, favourites, search, and full-screen projection mode.
 
-Thiucham is a web application featuring Liangmai song lyrics from "Hiuna Khomlui", "Khristen Madui Lui", and " Luisan". It is designed for both mobile and desktop, with support for touch gestures and keyboard navigation.
+## 📅 Project
 
+* **Type:** Progressive Web App (PWA), Single Page Application (SPA)
+* **Started:** 14 August 2024
+* **First Release:** 30 October 2024 (AppSheet)
+* **Web Version Launch:** January 2026
+* **Latest Update:** 26th August 2026
 
-**📂 Datasets:**
-- Hiuna Khomlui
-- Khristen Madui Lui
-- Luisan
+## 📂 Collections
 
+* **Hiuna Khomlui**
+* **Khristen Madui Lui**
+* **Luisan**
 
-**✨ Features**
+## ✨ Features
 
-- 🔍 Search — Fast filtering by ID, title, and translation
-- 📚 Category View — Group songs by category
-- ⭐ Favourites — Save and access starred songs
-- 📱 Projection Mode — Slide-based full-screen lyrics display
-- ⚡ Offline Support — Works without internet (PWA caching)
-- 🔁 SPA Navigation — Smooth transitions without page reload
+* 🔍 **Search** — Quickly filter songs by ID, title, and translation
+* 📚 **Collection View** — Browse songs within each collection
+* ⭐ **Favourites** — Save and access favourite songs
+* 📱 **Projection Mode** — Full-screen, slide-based lyrics display
+* 👆 **Touch Gestures** — Swipe between songs and collections
+* ⌨️ **Keyboard Navigation** — Navigate using keyboard controls on desktop
+* ⚡ **Offline Support** — PWA caching allows the application to work without an internet connection
+* 📖 **Lyrics Details** — Display song metadata, translation, and structured lyrics
 
+## 🛠️ Tech Stack
 
-**🛠️ Tech Stack**
+* **React**
+* **Vite**
+* **React Router**
+* **JavaScript**
+* **CSS**
+* **Service Worker** — Offline caching and PWA support
+* **LocalStorage** — Favourites persistence
 
-- Vanilla JavaScript (DOM-based SPA)
-- Service Worker (Caching & Offline)
-- LocalStorage (Favourites persistence)
+## 📱 Interaction
 
+### Mobile
 
-**📌 Notes**
+* Swipe left/right to navigate
+* Scroll vertically through lyrics
+* Tap controls for favourites, projection, and help
 
-- Optimized for mobile and desktop 
-- Supports touch gestures and keyboard controls
+### Desktop
+
+* Use keyboard arrows to navigate
+* Use `Space` or `Enter` where supported
+* Use `Esc` to close active views
+* Mouse interaction is supported throughout the application
+
+## 📦 Data
+
+* Song ID
+* Title
+* Translation
+* Key
+* Time signature
+* Lyrics sections
