@@ -4,6 +4,8 @@ import {
   useNavigate,
 } from "react-router-dom";
 
+import "../styles/CollectionList.css";
+
 import List from "../components/List";
 import useSwipe from "../hooks/useSwipe";
 import useKeyboardNavigation from "../hooks/useKeyboardNavigation";
@@ -64,7 +66,7 @@ export default function CollectionList() {
     const previousIndex =
       (currentIndex - 1 + 3) % 3;
 
-    navigate(`/${COLLECTIONS[previousIndex]}/list`);
+  navigate(`/${COLLECTIONS[previousIndex]}/list`);
   }
 
   function openSelectedSong() {
@@ -88,18 +90,37 @@ export default function CollectionList() {
     onEnter: openSelectedSong,
   });
 
-  const swipeHandlers = useSwipe({
+ const {
+  onTouchStart,
+  onTouchMove,
+  onTouchEnd,
+  offsetX,
+  isDragging,
+} =  useSwipe({
     onSwipeLeft: nextCollection,
     onSwipeRight: previousCollection,
   });
 
   return (
-    <main {...swipeHandlers}>
+     <div className="collection-scroll">
+    <main
+  className="collection-content"
+  onTouchStart={onTouchStart}
+  onTouchMove={onTouchMove}
+  onTouchEnd={onTouchEnd}
+  style={{
+    transform: `translateX(${offsetX}px)`,
+    transition: isDragging
+      ? "none"
+      : "transform 0.35s ease",
+  }}
+>
       <List
         songs={songs}
         collection={collection}
         onSelect={setSelectedIndex}
       />
     </main>
+    </div>
   );
 }

@@ -104,7 +104,6 @@ const {
 } = useSwipe({
   onSwipeLeft: nextSong,
   onSwipeRight: previousSong,
-  threshold: 115,
 });
 
   return (

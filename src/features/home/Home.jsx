@@ -20,7 +20,7 @@ export default function Home() {
           ▸ Khristen Madui Lui
         </button>
 
-        <button onClick={() => navigate("/Luisan")}>
+        <button onClick={() => navigate("/Luisan/list")}>
           ▸ Luisan
         </button>
       </div>

@@ -1,0 +1,19 @@
+.collection-scroll {
+  position: fixed;
+  inset: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  background: #fff;
+
+  overscroll-behavior: contain;
+}
+
+.collection-content {
+  min-height: 100%;
+  padding-top: var(--top-bar-height);
+  padding-bottom: var(--bottom-bar-height);
+
+  touch-action: pan-y;
+}

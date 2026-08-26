@@ -3,8 +3,7 @@
 }
 
 .app-content {
-  min-height: 100dvh;
-
-  padding-top: var(--top-bar-height);
-  padding-bottom: var(--bottom-bar-height);
+  height: 100dvh;
+    padding-top: var(--top-bar-height);
+    padding-bottom: var(--bottom-bar-height);
 }
