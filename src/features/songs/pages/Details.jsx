@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 import { useState } from "react";
 
-import { useFavourites } from "../../../contexts/FavouritesProvider";
+import { useFavourites } from "../contexts/FavouritesProvider";
 
 import useSwipe from "../hooks/useSwipe";
 import useKeyboardNavigation from "../hooks/useKeyboardNavigation";
@@ -88,6 +88,24 @@ function previousSong() {
   });
 }
 
+const sections = DETAIL_ORDER
+  .map(([first, second]) => {
+    const key =
+      song[first]
+        ? first
+        : song[second]
+          ? second
+          : null;
+
+    if (!key) return null;
+
+    return {
+      key,
+      text: song[key],
+    };
+  })
+  .filter(Boolean);
+
 useKeyboardNavigation({
   onNext: nextSong,
   onPrevious: previousSong,
@@ -108,17 +126,11 @@ const {
 
   return (
     <>
-     <button
-        className="details-close"
-        onClick={closeDetails}
-      >
-        〈
-      </button>
-
       {showHelp && (
   <div className="help-overlay">
     <div className="help-box">
-      <button onClick={() => setShowHelp(false)}>
+      <button className="close"
+      onClick={() => setShowHelp(false)}>
         ❌
       </button>
 
@@ -134,11 +146,47 @@ const {
       <p>← — Previous song</p>
       <p>Enter — Projection</p>
       <p>Esc — Close</p>
-    </div>
+  <button
+  className="navigate"
+  onClick={() => {
+    const originalLyrics = sections
+      .map(({ text }) => text)
+      .join("\n\n");
+
+    const correction = {
+      collection,
+      songId: song.ID,
+      title: song.Title,
+      originalLyrics,
+    };
+
+    const identityToken = localStorage.getItem("identityToken");
+
+    if (identityToken) {
+      navigate("../suggest-correction", {
+        state: { correction },
+      });
+      return;
+    }
+
+    navigate("/sign-in", {
+      state: {
+        correction,
+        returnTo: location.pathname.replace(
+      /\/[^/]+$/,
+      "/suggest-correction"
+    ),
+      },
+    });
+  }}
+>
+  📝 Suggest a correction
+</button>
+ </div>
   </div>
 )}
 
-      <div className="details-scroll">
+      <div className="fullscreen-overlay">
     <main
   className="details"
   onTouchStart={onTouchStart}
@@ -203,25 +251,15 @@ const {
       <div className="lyrics-container"
       onDoubleClick={openProjection}
       >
-        {DETAIL_ORDER.map(([first, second]) => {
-          const key =
-            song[first]
-              ? first
-              : song[second]
-                ? second
-                : null;
+       {sections.map(({ key, text }) => (
+  <div
+    key={key}
+    className="lyrics"
+  >
+    {text}
+  </div>
+))}
 
-          if (!key) return null;
-
-          return (
-            <div
-              key={key}
-              className="lyrics"
-            >
-              {song[key]}
-            </div>
-          );
-        })}
       </div>
     </main>
      </div>

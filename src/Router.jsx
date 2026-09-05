@@ -1,16 +1,20 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet  } from "react-router-dom";
 
-import AppLayout from "./layouts/AppLayout.jsx";
-import CollectionShell from "./layouts/CollectionShell.jsx";
-import CategoriesShell from "./layouts/CategoriesShell.jsx";
-import SearchShell from "./layouts/SearchShell.jsx";
-import FavouritesShell from "./layouts/FavouritesShell.jsx";
+import AppLayout from "./layouts/AppLayout";
 
-import { FavouritesProvider } from "./contexts/FavouritesProvider.jsx";
+import CollectionShell from "./features/songs/layouts/CollectionShell";
+import CategoriesShell from "./features/songs/layouts/CategoriesShell";
+import SearchShell from "./features/songs/layouts/SearchShell";
+import FavouritesShell from "./features/songs/layouts/FavouritesShell";
 
-import Home from "./features/home/Home.jsx";
-import Details from "./features/songs/pages/Details.jsx";
-import Projection from "./features/songs/pages/Projection.jsx";
+import { FavouritesProvider } from "./features/songs/contexts/FavouritesProvider";
+
+import Home from "./features/home/Home";
+import SignIn from "./features/home/SignIn";
+
+import CorrectionPage from "./features/corrections/pages/CorrectionPage";
+import Details from "./features/songs/pages/Details";
+import Projection from "./features/songs/pages/Projection";
 
 const router = createBrowserRouter(
   [
@@ -18,14 +22,22 @@ const router = createBrowserRouter(
       path: "/",
       element: <Home />,
     },
+   {
+      path: "/sign-in",
+      element: <SignIn />,
+    },
+   {
+  element: <AppLayout />,
+  children: [
 
     {
       element: (
         <FavouritesProvider>
-          <AppLayout />
+          <Outlet />
         </FavouritesProvider>
       ),
       children: [
+
         {
           path: ":collection/list",
           element: <CollectionShell />,
@@ -35,8 +47,12 @@ const router = createBrowserRouter(
               element: <Details />,
             },
             {
-             path: "projection",
-             element: <Projection />,
+              path: "suggest-correction",
+             element: <CorrectionPage />,
+            },
+            {
+              path: "projection",
+              element: <Projection />,
             },
           ],
         },
@@ -50,8 +66,12 @@ const router = createBrowserRouter(
               element: <Details />,
             },
             {
-             path: "projection",
-             element: <Projection />,
+              path: "suggest-correction",
+             element: <CorrectionPage />,
+            },
+            {
+              path: "projection",
+              element: <Projection />,
             },
           ],
         },
@@ -65,13 +85,18 @@ const router = createBrowserRouter(
               element: <Details />,
             },
             {
-             path: "projection",
-             element: <Projection />,
+              path: "suggest-correction",
+             element: <CorrectionPage />,
+            },
+            {
+              path: "projection",
+              element: <Projection />,
             },
           ],
         },
+
         {
-          path: "Favourites",
+          path: "Favourites/list",
           element: <FavouritesShell />,
           children: [
             {
@@ -79,13 +104,20 @@ const router = createBrowserRouter(
               element: <Details />,
             },
             {
-             path: "projection",
-             element: <Projection />,
+              path: "suggest-correction",
+             element: <CorrectionPage />,
+            },
+            {
+              path: "projection",
+              element: <Projection />,
             },
           ],
         },
+
       ],
     },
+  ],
+},
   ],
   {
     basename: "/Webapp",

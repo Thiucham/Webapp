@@ -7,9 +7,9 @@ export default function Home() {
 
   return (
     <main className="home">
-      <h1 className="home-title">THIUCHAM</h1>
+      <h1>THIUCHAM</h1>
 
-      <p className="home-subtitle">Choose a collection</p>
+      <p>Choose a collection</p>
 
       <div className="home-collections">
         <button onClick={() => navigate("/Hiuna-Khomlui/list")}>
@@ -23,14 +23,15 @@ export default function Home() {
         <button onClick={() => navigate("/Luisan/list")}>
           ▸ Luisan
         </button>
-      </div>
-
-      <button
+         <button
         className="home-favourites"
         onClick={() => navigate("/favourites")}
       >
         ⭐ Favourites
       </button>
+      </div>
+
+
     </main>
   );
 }

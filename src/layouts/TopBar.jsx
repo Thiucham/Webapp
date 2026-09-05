@@ -5,7 +5,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-import "./styles/TopBar.css";
+import "../styles/TopBar.css";
 
 export default function TopBar() {
   const location = useLocation();
@@ -13,10 +13,9 @@ export default function TopBar() {
 
 const path = location.pathname.split("/");
 const collection = path[1];
+const showMenu = !path[3];
 const isSearchPage = path[2] === "search";
 const isFavourites = collection === "Favourites";
-
-const title = collection || "THIUCHAM";
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -29,25 +28,27 @@ const title = collection || "THIUCHAM";
       <header className="top-bar">
 
         <button
-          className="top-left"
-          onClick={() => setIsMenuOpen(prev => !prev)}
-        >
-          ☰
-        </button>
+  className="top-left"
+  onClick={() =>
+    showMenu
+      ? setIsMenuOpen(prev => !prev)
+      : navigate(-1)
+  }
+>
+  {showMenu ? "☰" : "〈"}
+</button>
 
         <div className="top-center">
-  {title}
+  {collection}
 </div>
 
 {!isFavourites && (
          <button
   className="top-right"
   onClick={() => {
-    navigate(
-      isSearchPage
-        ? `/${collection}/list`
-        : `/${collection}/search`
-    );
+    isSearchPage
+  ? navigate(-1)
+  : navigate(`/${collection}/search`);
   }}
 >
   {isSearchPage ? "✕" : "🔍"}
@@ -78,7 +79,7 @@ const title = collection || "THIUCHAM";
           </NavLink>
 
           <NavLink
-            to="/Favourites"
+            to="/Favourites/list"
             className="left-item"
           >
             ⭐ Favourites

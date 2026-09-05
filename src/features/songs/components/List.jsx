@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import { useFavourites } from "../../../contexts/FavouritesProvider";
+import { useFavourites } from "../contexts/FavouritesProvider";
 
 import "../styles/List.css";
 

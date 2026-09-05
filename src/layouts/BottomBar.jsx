@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-import "./styles/BottomBar.css";
+import "../styles/BottomBar.css";
 
 export default function BottomBar() {
   return (

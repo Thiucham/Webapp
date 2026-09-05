@@ -1,37 +1,7 @@
-.details-scroll {
-  position: fixed;
-  inset: 0;
-
-  background: #fff;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-  overscroll-behavior: contain;
-}
-
 .details {
   min-height: 100%;
   padding: 3.8rem 1rem 6.5rem;
   touch-action: pan-y;
-}
-
-.details-close {
-  position: fixed;
-
-  top: 0;
-  left: 0;
-
-  width: var(--top-bar-side-width);
-  height: 3.2rem;
-
-  border: none;
-  background: #fff;
-
-  font-size: var( --font-medium);
-
-  cursor: pointer;
-
-  z-index: 1100;
 }
 
 .detail-head {
@@ -118,16 +88,26 @@ margin: auto 0;
 }
 
 .help-box > button {
-  position: absolute;
-
-  top: 0.75rem;
-  right: 0.75rem;
-
-  border: none;
   background: none;
 
   font-size: 1.2rem;
   cursor: pointer;
+}
+
+.help-box .close {
+   border: none;
+   position: absolute;
+    top: 0.75rem;
+  right: 0.75rem;
+}
+
+.help-box .navigate {
+  border: 1px solid #ddd;
+  border-radius: 9px;
+  display: block;
+  width: 100%;
+  margin-top: var(--space-lg);
+  text-align: center;
 }
 
 .lyrics-container {

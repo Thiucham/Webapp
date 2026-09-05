@@ -1,0 +1,87 @@
+.sign-in {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-md);
+}
+
+.go-back {
+  position: fixed;
+  top: 1rem;
+  left: 0;
+  width: var(--top-bar-side-width);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.sign-in-card {
+  width: 100%;
+  max-width: 26rem;
+  text-align: center;
+}
+
+.sign-in-card h1 {
+  margin: 0 0 var(--space-xl);
+  font-size: var(--font-title);
+}
+
+.sign-in-description {
+  margin: 0;
+  font-size: var(--font-medium);
+  line-height: 1.5;
+}
+
+.sign-in-card form {
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-in-card label {
+  margin-bottom: var(--space-sm);
+  font-weight: var(--font-weight-bold);
+  text-align: left;
+}
+
+.sign-in-card input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--space-md);
+  border: 1px solid #ddd;
+  border-radius: var(--radius-md);
+  font-size: var(--font-medium);
+  outline: none;
+}
+
+.sign-in-card input:focus {
+  border-color: #555;
+}
+
+.sign-in-card form button {
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border: 1px solid #ddd;
+  border-radius: var(--radius-md);
+  background: none;
+  font-size: var(--font-medium);
+  cursor: pointer;
+}
+
+.sign-in-note {
+  margin: var(--space-md) 0 0;
+  font-size: var(--font-small);
+  line-height: 1.5;
+}
+
+.sign-in-card > button {
+  display: block;
+  margin: var(--space-lg) auto 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: var(--font-small);
+  cursor: pointer;
+}
