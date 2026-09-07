@@ -54,6 +54,10 @@ async function handleSubmit() {
     if (result.success) {
   setSubmitted(true);
 } else {
+  if (result.error === "Invalid identity token") {
+    localStorage.removeItem("identityToken");
+  }
+
   alert(result.error || "Failed to submit correction.");
 }
 
