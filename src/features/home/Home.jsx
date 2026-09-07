@@ -25,7 +25,7 @@ export default function Home() {
         </button>
          <button
         className="home-favourites"
-        onClick={() => navigate("/favourites")}
+        onClick={() => navigate("/favourites/list")}
       >
         ⭐ Favourites
       </button>
