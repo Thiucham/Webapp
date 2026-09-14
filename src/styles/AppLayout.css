@@ -3,7 +3,7 @@
 }
 
 .app-content {
-  height: 100dvh;
+  height: 100%;
     padding-top: var(--top-bar-height);
     padding-bottom: var(--bottom-bar-height);
 }

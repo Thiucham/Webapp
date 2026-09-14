@@ -10,7 +10,7 @@
 
 .correction-editor textarea {
   width: 100%;
-  min-height: 70vh;
+  min-height: 80vh;
 
   padding: var(--space-md);
 
@@ -18,9 +18,28 @@
   border-radius: var(--radius-md);
 
   font: inherit;
+  font-size: var(--font-large);
   line-height: 1.5;
 
   resize: vertical;
+}
+
+.correction-editor button{
+  background: none;
+
+  font-size: var(--font-medium);
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: var(--radius-lg);
+  display: block;
+  width: 100%;
+  margin-top: var(--space-lg);
+  text-align: center;
+}
+
+.correction-editor button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .correction-success {
