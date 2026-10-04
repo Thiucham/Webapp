@@ -8,8 +8,6 @@
   overflow-x: hidden;
 
   background: #fff;
-
-  overscroll-behavior: contain;
 }
 
 .collection-content {

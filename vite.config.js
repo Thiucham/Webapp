@@ -17,7 +17,7 @@ export default defineConfig({
         background_color: "#ffffff",
         display: "standalone",
         start_url: "/Webapp/",
-         scope: "/Webapp/",
+        scope: "/Webapp/",
         icons: [
           {
             src: "/Webapp/icons/icon-192.png",
@@ -39,6 +39,10 @@ export default defineConfig({
       },
     }),
   ],
+
+  server: {
+    host: true,
+  },
 
   base: "/Webapp/",
 });

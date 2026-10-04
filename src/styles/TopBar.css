@@ -19,6 +19,7 @@
   min-width: var(--top-bar-side-width);
   height: 100%;
   border: none;
+  font-size: var( --font-title);
   background: none;
   cursor: pointer;
 }

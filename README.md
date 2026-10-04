@@ -10,7 +10,7 @@ Thiucham is designed for both mobile and desktop, with touch gestures, keyboard 
 * **Started:** 14 August 2024
 * **First Release:** 30 October 2024 (AppSheet)
 * **Web Version Launch:** January 2026
-* **Latest Update:** 26th August 2026
+* **Latest Update:** 4th October 2026
 
 ## 📂 Collections
 

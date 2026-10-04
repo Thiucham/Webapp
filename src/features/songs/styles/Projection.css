@@ -45,7 +45,7 @@
 .projection-slide .lyrics {
   margin: auto 0;
   white-space: pre-line;
-  font-size: var(--font-title);
+  font-size: var(--font-projection);
   line-height: 1.6;
   text-align: center;
 }
