@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  height: 4rem;
+  height: var(--bottom-bar-height);
   display: flex;
   background: #ffffff;
   box-shadow: 0 -1px 6px #0000001f;

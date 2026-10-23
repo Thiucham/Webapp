@@ -1,73 +1,59 @@
 import { useEffect, useState } from "react";
-import {
-  NavLink,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import "../styles/TopBar.css";
 
-export default function TopBar() {
-  const location = useLocation();
+export default function TopBar({ path }) {
   const navigate = useNavigate();
 
-const path = location.pathname.split("/");
-const collection = path[1];
-const showMenu = !path[3];
-const isSearchPage = path[2] === "search";
-const isFavourites = collection === "Favourites";
+  const collection = path[0];
+  const showMenu = path.length <= 2;
+  const isSearchPage = path[1] === "search";
+  const isFavourites = collection === "Favourites";
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-  setIsMenuOpen(false);
-}, [location.pathname]);
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <>
       <header className="top-bar">
-
         <button
-  className="top-left"
-  onClick={() =>
-    showMenu
-      ? setIsMenuOpen(prev => !prev)
-      : navigate(-1)
-  }
->
-  {showMenu ? "☰" : "〈"}
-</button>
+          className="top-left"
+          onClick={() =>
+            showMenu
+              ? setIsMenuOpen(prev => !prev)
+              : navigate(-1)
+          }
+        >
+          {showMenu ? "☰" : "〈"}
+        </button>
 
         <div className="top-center">
-  {collection}
-</div>
+          {collection}
+        </div>
 
-{!isFavourites && (
-         <button
-  className="top-right"
-  onClick={() => {
-    isSearchPage
-  ? navigate(-1)
-  : navigate(`/${collection}/search`);
-  }}
->
-  {isSearchPage ? "✕" : "🔍"}
-</button>
-)}
-
+        {!isFavourites && (
+          <button
+            className="top-right"
+            onClick={() =>
+              isSearchPage
+                ? navigate(-1)
+                : navigate(`/${collection}/search`)
+            }
+          >
+            {isSearchPage ? "✕" : "🔍"}
+          </button>
+        )}
       </header>
 
       {isMenuOpen && (
         <aside className="left-bar">
+          <div className="left-head">Category</div>
 
-          <div className="left-head">
-            Category
-          </div>
-
-          <NavLink
-            to="/Luisan/categories"
-            className="left-item"
-          >
+          <NavLink to="/Luisan/categories" className="left-item">
             ▸ Luisan
           </NavLink>
 
@@ -78,10 +64,7 @@ const isFavourites = collection === "Favourites";
             ▸ Khristen Madui Lui
           </NavLink>
 
-          <NavLink
-            to="/Favourites/list"
-            className="left-item"
-          >
+          <NavLink to="/Favourites/list" className="left-item">
             ⭐ Favourites
           </NavLink>
 
@@ -93,7 +76,6 @@ const isFavourites = collection === "Favourites";
           >
             ▸ App Info
           </a>
-
         </aside>
       )}
     </>

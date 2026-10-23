@@ -146,9 +146,92 @@ const {
       <p>← — Previous song</p>
       <p>Enter — Projection</p>
       <p>Esc — Close</p>
+ </div>
+  </div>
+)}
+
+      <div className="fullscreen-overlay">
+
+    <main
+  className="details"
+  onTouchStart={onTouchStart}
+  onTouchMove={onTouchMove}
+  onTouchEnd={onTouchEnd}
+  style={{
+    transform: `translateX(${offsetX}px)`,
+    transition: isDragging
+      ? "none"
+      : "transform 0.35s ease",
+  }}
+>
+      <div className="detail-head">
+        <div>
+            {song.ID}
+        </div>
+
+        <div>
+          {song.Title}
+        </div>
+      </div>
+
+      {song.Translation && (
+        <div className="translation">
+          {song.Translation}
+        </div>
+      )}
+
+  <div className="detail-meta-info">
+    <div className="song-meta-item">
+      <span className="song-meta-label">KEY</span>
+      <span className="song-meta-value">
+        {song.Key || "⚪"}
+      </span>
+    </div>
+
+    <div className="song-meta-item">
+      <span className="song-meta-label">TIME</span>
+      <span className="song-meta-value">
+        {song["Time signature"] || "⚪"}
+      </span>
+    </div>
+  </div>
+
+  <div className="detail-actions">
   <button
-  className="navigate"
-  onClick={() => {
+  onClick={openProjection}
+>
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1" />
+    <path d="m12 15 5 6H7l5-6z" />
+  </svg>
+</button>
+
+    <button
+    aria-label="Toggle-Favourites"
+  onClick={() => toggleFavourite(collection, song.ID)}
+>
+  {isFavourite(collection, song.ID) ? "⭐" : "☆"}
+</button>
+
+    <button
+      onClick={() => setShowHelp(true)}
+      aria-label="Help"
+    >ⓘ
+    </button>
+
+    <button
+      aria-label="Suggest a correction"
+      onClick={() => {
     const originalLyrics = sections
       .map(({ text }) => text)
       .join("\n\n");
@@ -179,74 +262,10 @@ const {
       },
     });
   }}
->
-  📝 Suggest a correction
-</button>
- </div>
-  </div>
-)}
-
-      <div className="fullscreen-overlay">
-    <main
-  className="details"
-  onTouchStart={onTouchStart}
-  onTouchMove={onTouchMove}
-  onTouchEnd={onTouchEnd}
-  style={{
-    transform: `translateX(${offsetX}px)`,
-    transition: isDragging
-      ? "none"
-      : "transform 0.35s ease",
-  }}
->
-      <div className="detail-head">
-        <div>
-         <button
-  className="favourite"
-  onClick={() => toggleFavourite(collection, song.ID)}
->
-  {isFavourite(collection, song.ID) ? "⭐" : "☆"}
-</button>
-
-          <span>
-            {song.ID}
-          </span>
-        </div>
-
-        <div>
-          {song.Title}
-        </div>
-      </div>
-
-      {song.Translation && (
-        <div className="translation">
-          {song.Translation}
-        </div>
-      )}
-
-  <div className="detail-meta">
-  <div className="detail-meta-info">
-    <p className="song-meta">
-      <strong>Key:</strong>{" "}
-      {song.Key || "⚪"}
-    </p>
-
-    <p className="song-meta">
-      <strong>Time signature:</strong>{" "}
-      {song["Time signature"] || "⚪"}
-    </p>
-  </div>
-
-  <div className="detail-actions">
-    <button onClick={openProjection}>
-      ⛶
+    >✎
     </button>
-
-   <button onClick={() => setShowHelp(true)}>
-  ?
-</button>
   </div>
-</div>
+
 
       <div className="lyrics-container"
       onDoubleClick={openProjection}
@@ -259,7 +278,6 @@ const {
     {text}
   </div>
 ))}
-
       </div>
     </main>
      </div>

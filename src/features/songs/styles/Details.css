@@ -19,47 +19,12 @@
   font-weight: var(--font-weight-bold);
 }
 
-.favourite {
-  margin-right: var(--space-sm);
-
-  border: none;
-  background: none;
-
-  font: inherit;
-  cursor: pointer;
-}
-
 .translation {
   text-align: center;
   font-size: var( --font-medium);
   font-style: italic;
   opacity: 0.9;
   margin-bottom: var(--space-xl);
-}
-
-.detail-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.song-meta {
-  font-size: var( --font-medium);
-  margin: var(--space-sm) 0;
-}
-
-.detail-actions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
-
-.detail-actions button {
-  border: none;
-  background: none;
-
-  font-size: var( --font-medium);
-  cursor: pointer;
 }
 
 .help-overlay {
@@ -87,27 +52,15 @@ margin: auto 0;
   border-radius: 12px;
 }
 
-.help-box > button {
+.help-box .close {
   background: none;
 
   font-size: var(--font-medium);
   cursor: pointer;
-}
-
-.help-box .close {
    border: none;
    position: absolute;
     top: 0.75rem;
   right: 0.75rem;
-}
-
-.help-box .navigate {
-  border: 1px solid #ddd;
-  border-radius: var(--radius-lg);
-  display: block;
-  width: 100%;
-  margin-top: var(--space-lg);
-  text-align: center;
 }
 
 .lyrics-container {
@@ -120,3 +73,56 @@ margin: auto 0;
   line-height: 1.6;
   margin-bottom: var(--space-xl);
 }
+
+.detail-meta-info {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xl);
+}
+
+.song-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.song-meta-label {
+  font-size: var(--font-small);
+  font-weight: 300;
+}
+
+.song-meta-value {
+  font-size: var(--font-medium);
+  font-weight: 600;
+}
+
+.detail-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.detail-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+  padding: 0;
+
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: var(--font-large);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.detail-actions svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
