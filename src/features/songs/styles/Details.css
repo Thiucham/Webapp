@@ -30,7 +30,7 @@
 .help-overlay {
   position: fixed;
  top: var(--top-bar-height);
-  bottom: var(--bottom-bar-height);
+  bottom: 0;
   left: 0;
   right: 0;
   display: flex;
