@@ -8,7 +8,6 @@ import "../styles/CollectionList.css";
 
 import List from "../components/List";
 import useSwipe from "../hooks/useSwipe";
-import useKeyboardNavigation from "../hooks/useKeyboardNavigation";
 
 const COLLECTIONS = [
   "Hiuna-Khomlui",
@@ -83,12 +82,6 @@ export default function CollectionList() {
       },
     });
   }
-
-  useKeyboardNavigation({
-    onNext: nextCollection,
-    onPrevious: previousCollection,
-    onEnter: openSelectedSong,
-  });
 
  const {
   onTouchStart,
