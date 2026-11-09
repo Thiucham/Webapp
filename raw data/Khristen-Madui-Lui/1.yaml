@@ -52,18 +52,42 @@ SCORE:
     SOPRANO: |
       :s |s :- .fe :l .s | m :- :d |
       r :- .m :f .s | m :- :s |
-      s :- .s :f .m | l .t :d` :l |
+      s :- .s :f .m | l .t :d' :l |
       s :- .d :r .m | d :- : |
     ALTO: |
       :d | d :- .d :d .d | d :- :d |
       t, :- .d :r .t, | d :- :d |
-      d :- .d :t, .d | l .t :d` :l |
-      s :- .d :r .m | d :- : |
+      d :- .d :t, .d | d .f :m :d |
+      d :- .d :t, .t, | d :- : |
     TENOR: |
+      :m | m :- .re :f .m| s :- :m |
+      s :- .s :s .s | s :- :m |
+      m :- .s :s .d' | l .s :s :f |
+      m :- .m :f .s | m :- :|
     BASS: |
+      :d | d :- .d :d .d| d :- :d
+      s, :- .s, :s, .s, | d :- :d |
+      d :- .m :r .d| f .r :d :f, |
+      s, :- .s, :s, .s, | d :- :|
 
   CHORUS:
     SOPRANO: |
+      | d' :- .d' :r' .t | d' :- : |
+      l :- .d' :t .l | s :- : |
+      s :- .s :f .m | l .t :d' :l |
+      s :- .d :r .m | d :- |
     ALTO: |
+      | m :- .m :f .r | m :- : |
+      f :- .l :s .f | m :- : |
+      d :- .d :t, .d | d .f :m :d |
+      d : .d :t, .t, | d:- |
     TENOR: |
+      | s :- .s :l .s | s :- : |
+      d' :- .d' :d' .d' | d' :- : |
+      m :- .s :s .d' | l .s :s :f |
+      m :- .m :f .s | m :- |
     BASS: |
+      | d :- .d :f, .s, | d :- :|
+      f, :- .f, :f, .f, | d :- : |
+      d :- .m :r .d | f .r :d :f, |
+      s, :- .s, :s, .s, | d :- |
