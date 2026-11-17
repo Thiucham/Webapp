@@ -9,7 +9,7 @@ import { useFavourites } from "../contexts/FavouritesProvider";
 import useSwipe from "../hooks/useSwipe";
 import useKeyboardNavigation from "../hooks/useKeyboardNavigation";
 
-import "../styles/Details.css";
+import "./Details.css";
 
 const DETAIL_ORDER = [
   ["V1", "CH-"],

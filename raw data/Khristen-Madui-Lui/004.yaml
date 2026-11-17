@@ -1,0 +1,57 @@
+ID: "4"
+
+Title: "TINGWANG KEN DIBAMLO"
+
+Key: "A"
+
+Time signature: "3/4"
+
+V1: |
+  1. Tingwang ken di bamlo, paten kam jeng niu,
+  Kadihtu lungsa jiu panah tu lang kiu;
+  Nuan jeng niu Paring ting pi khaibo piu-e,
+  Mai hi naleng ringbo rengmun le khai-e.
+
+CH: |
+  (Chorus)
+  Rapiu tu thuan bamlo pakhuan king lo naliu 
+  Rapiu tu thuan bamlo chamai nah chun wijiu 
+  Jesu pen niu Tingwang khu wanglu bui-e
+  Patu pi paken kadibo thiumilo
+
+V2: |
+  2.Tazai niu liu khai jiu rankhai bo ngao de,
+  Tingwang lad riad tu malum mai hina niu;
+  Kasa ka mao bo hina sao khai bi jiu,
+  Jesu niu lungsa khaibi bo ngao lude.
+
+V3: |
+  3.Pakendibo ngam kam khai jiu kati khai,
+  Panah piu Jesu jeng niu aliu chunwi;
+  Siga masan bi ku bidi diang sune,
+  Jesu tu ngao sai pakendibo thiune.
+
+Translation: "(To God be the Glory)"
+
+Category: "Grace, Redemption & Love"
+
+SCORE:
+  VERSE:
+    SOPRANO: |
+      :s,|s,:-:l,.t,|d:s,:d|r:s,:r|m:-:m|f:l,:f|m:d:m|m:r:l,|r:--:s,|s,:-:l,.t,|d:s,:d|r:s,:r|m:--:m|s:f:r|d:t,:d|m:m:r|d:--||
+    ALTO: |
+      :m,|(m,:s,):f,.f,|m,:m,:s,|s,:f,:s,|s,:--:s,|l,:f,:l,|s,:s,:s,|fe,:fe,:l,|s,:--:f,|(m,:s,):f,.f,|m,:m,:s,|s,:s,:s,|s,:--:ta,|l,:l,:l,|s,:s,:s,|s,:s,:f,|m,:--||
+    TENOR: |
+      :d|d:--:t,.s,|s,:d:d|t,:t,:t,|d:--:d|d:d:d|d:d:d|l,:l,:(r.d)|t,:--:t,|d:-:t,.s,|s,:d:d|t,:t,:t,|d:--:d|d:r:f|m:r:m|d:d:t,|d:--||
+    BASS: |
+      :d,|(d,:m,):s,.s,|d,:d,:m,|s,:s,:s,|d,:--:d,|f,:f,:f,|d,:m,:d,|r,:r,:fe,|s,:--:s,|(d,:m,):s,.s,|d,:d,:m,|s,:s,:s,|d,:--:d,|f,:f,:f,|s,:s,:s,|s,:s,:s,|d,:--||
+
+  CHORUS:
+    SOPRANO: |
+      :m.,f|s:--:m.,f|s:--:s.,m|d:r:m|r:--:r.,m|f:--:r.,m|f:--:f.r|s:s:f|m:--:s,|s,:--l,.t,|d:s,:d|r:s,:r|m:--:m|s:f:r|d:t,:d|m:m:r|d:--||
+    ALTO: |
+      :s,.,s,|s,:--:d.,t,|d:--:s,.,s,|s,:s,:s,|s,:--:s,.,s,|s,:--:s,.,s,|s,:--:s,.s,|s,:s,:s,|s,:--:f,|(m,:s,):f,.f,|m,:m,:s,|s,:s,:s,|s,:--:ta,|l,:l,:l,|s,:s,:s,|s,:s,:f,|m,:--||
+    TENOR: |
+      :d.,r|m:--:d.,r|m:--:m.,d|d:t,:d|t,:--:t,.,d|r:--t,.,d|r:--:r.t,|d:d:t,|d:--:t,|d:--:t,.s,|s,:d:d|t,:t,:t,|d:--:d|d:r:f|m:r:m|d:d:t,|d:--||
+    BASS: |
+      :d.,d|d:--:d.,d|d:--:d.,d,|m,:r,:d,|s,:--:s,.,s,|s,:--:s,.,s,|s,:--:s,.f,|m,:m,:r,|d,:-:s,|(d,:m,):s,.s,|d,:d,:m,|s,:s,:s,|d,:--:d,|f,:f,;f,|s,:s,:s,|s,:s,:s,|d,:--||

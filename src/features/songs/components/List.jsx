@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useFavourites } from "../contexts/FavouritesProvider";
 
-import "../styles/List.css";
+import "./List.css";
 
 export default function List({
   songs = [],

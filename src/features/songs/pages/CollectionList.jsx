@@ -4,7 +4,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-import "../styles/CollectionList.css";
+import "./CollectionList.css";
 
 import List from "../components/List";
 import useSwipe from "../hooks/useSwipe";

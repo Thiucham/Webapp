@@ -1,0 +1,63 @@
+ID: "3"
+
+Title: "PHUILO HAIJIU LUNGSABO"
+
+Key: "D"
+
+Time signature: "4/4"
+
+V1: |
+  1. Phuilo Tingwang niu lungsabo,
+  Mai dinsi lulak ge;
+  Nuan phungjiu hami maidungtu,
+  Panah chiujiu kukhai.
+
+CH: |
+  (Chorus)
+  Phuilo haijiu lungsabo,
+  Haijiu lungsabo Apiu niu pikhaibo gu hai-e.
+  Aliu Rapiu Tingwang niu,
+  Panah mai ku khai bide.
+
+V2: |
+  2. Aliu diuta de tuhoira,
+  Aruang khai pazai niu;
+  Lungsa bose ngao lu saira.
+  A Rapiu khu bamne.
+
+V3: |
+  3. Paken dibotu lura leng, 
+  Aliu mana wang-e; 
+  A Rapiu lun ngaolu saira,
+  A Rapiu khu bamne.
+
+V4: |
+  4. Pathoi kawibo lura leng,
+  Aliu lung masankhe;
+  Pakendibo a Rapiu tu,
+  Aliu ngaoji sune.
+
+Translation: "(Behold, What Love?)"
+
+Category: "Grace, Redemption & Love"
+
+SCORE:
+  VERSE:
+    SOPRANO: |
+      :(d.m)|s:s|s:d'|s:-.f|m:(d.r)|m:(s.f)|m:r|d:--|--:(m.s)|l:l|l:(f.l)|d':d'|d':(s.d')|(t.r'):(r'.d')|t:l|s:--|--||
+    ALTO: |
+      :d|d:r|m:re|m:-.r|d:d|d:(m.r)|d:t,|d:--|--:(d.m)|f:f|f:(d.f)|m:m|m:m|r:(s.fe)|s:r|r:--|--||
+    TENOR: |
+      :m|m:f|s:fe|s:-.s|s:(m.f)|s:d'|d':(s.f)|m:--|--:(s.d')|d':d'|d':l|s:s|s:(d'.s)|(s.t):(t.l)|s:(fe.d)|t:--|--||
+    BASS: |
+      :d|d:d|d:d|d:-.d|d:d|d:d|s,:s,|d:--|--:d|f:f|f:f|d:d|d:d|r:r|r:r|s:--|--||
+
+  CHORUS:
+    SOPRANO: |
+      |s:-:-|d':-:-|-:-:-|-:-:d'|d':t:l|s:-:-|-:-:-|-:-:s|l:s:f|m:-:m|r:-:m|f:-:s|l:-:t|l:-:-|s:-:-|-:-:-|s:-:-|m':-:-|-:-:-|-:-:r'|d':t:l|s:-:-|-:-:-|-:-:-|(d':r'):m'|r':-:-|r':-:-|d':-:-|t:-:-|d':-:-|-:-:-|-:-:-||
+    ALTO: |
+      |f:-:-|m:-:-|-:-:-|-:-:m|m:s:f|m:-:-|-:-:-|-:-:m|d:d:d|d:-:d|t,:-:d|r:-:m|f:-:s|f:-:-|m:-:-|-:-:-|m:-:-|s:-:-|-:-:-|-:-:s|l:s:f|m:-:-|-:-:-|-:-:-|(m:f):s|f:-:-|f:-:-|m:-:-|(r:m:f)|m:-:-|-:-:-|-:-:-||
+    TENOR: |
+      |s:-:-|s:-:s|s:s:s|s:-:-|(s:-.d')|d':-:d'|d':d':d'|d':-:d'|d':t:l'|s:-:s|s:-:s|s:-:d'|(d':-:d')|d':-:-|d':-:-|-:-:-|d':-:-|d':-:-|d':-:d'|d':-:-|d':d':d'|d':-:d'|d':-:d'|d':-:-|s:-:d'|l:-:-|l:-:-|s:-:-|s:-:-|s:-:-|-:-:-|-:-:-||
+    BASS: |
+      |s:-:-|d:-:d|d:d:d|d:-:-|d:-:-|d:-:d|d:m:s|d':-:d'|f:f:f|d:-:d|s,::s,|s,:-:s,|s,:-:s,|d:-:-|d:-:-|-:-:-|d:-:-|d:-:-|d:-:d|d:-:-|f:f:f|d:-:d|m:-:s|d':-:-|d:-:d|f:-:-|r:-:-|s:-:-|s,:-:-|d-:-:-|-:-:-|-:-:-||

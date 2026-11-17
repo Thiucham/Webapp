@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import "../styles/CorrectionPage.css";
+import "./CorrectionPage.css";
 import { API_URL } from "../../../api/config";
 
 export default function CorrectionPage() {

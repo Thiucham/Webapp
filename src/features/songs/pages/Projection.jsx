@@ -6,7 +6,7 @@ import useControlsVisibility from "../hooks/useControlsVisibility";
 import useSwipe from "../hooks/useSwipe";
 import useKeyboardNavigation from "../hooks/useKeyboardNavigation";
 
-import "../styles/Projection.css";
+import "./Projection.css";
 
 const PROJECTION_ORDER = [
   ["V1", "CH-"],

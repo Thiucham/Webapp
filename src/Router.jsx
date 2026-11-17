@@ -10,7 +10,7 @@ import FavouritesShell from "./features/songs/layouts/FavouritesShell";
 import { FavouritesProvider } from "./features/songs/contexts/FavouritesProvider";
 
 import Home from "./features/home/Home";
-import SignIn from "./features/home/SignIn";
+import SignIn from "./features/auth/SignIn";
 
 import CorrectionPage from "./features/corrections/pages/CorrectionPage";
 import Details from "./features/songs/pages/Details";

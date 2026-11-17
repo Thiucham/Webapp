@@ -7,7 +7,7 @@ import {
 import useKeyboardNavigation from "../hooks/useKeyboardNavigation";
 
 import List from "../components/List";
-import "../styles/Search.css";
+import "./Search.css";
 
 function normalize(str) {
   return (str || "")
