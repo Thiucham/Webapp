@@ -1,0 +1,1 @@
+import"./FavouritesProvider-7J2dXjDk.js";

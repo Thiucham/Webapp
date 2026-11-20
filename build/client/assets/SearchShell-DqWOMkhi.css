@@ -1,0 +1,1 @@
+.search-input{width:min(90%,600px);margin:var(--space-md) auto;padding:.75rem var(--space-md);font-size:var(--font-medium);border-radius:var(--space-sm);border:1px solid #ddd;outline:none;display:block}.search-input:focus{border-color:#999}
