@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function useControlsVisibility() {
-  const [showControls, setShowControls] = useState(true);
+  const [showControls, setShowControls] = useState(false);
   const timer = useRef(null);
 
   function show() {

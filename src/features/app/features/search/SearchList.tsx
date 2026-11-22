@@ -7,8 +7,6 @@ import {
 
 import { loader } from "~features/app/components/layouts/AppLayout";
 
-import useKeyboardNavigation from "../hooks/useKeyboardNavigation.ts";
-
 import List from "../components/List.tsx";
 import "./Search.css";
 
@@ -25,17 +23,12 @@ export default function SearchList() {
   const songs = useRouteLoaderData<typeof loader>("app-layout");
 
   const [query, setQuery] = useState("");
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const inputRef = useRef(null);
 
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
-
-  useEffect(() => {
-    setSelectedIndex(0);
-  }, [query]);
 
   const normalizedQuery = normalize(query);
 
@@ -48,25 +41,6 @@ export default function SearchList() {
             normalize(song.Title).includes(normalizedQuery) ||
             normalize(song.Translation).includes(normalizedQuery)
         );
-
-  function openSelectedSong() {
-    const song = results[selectedIndex];
-
-    if (!song) return;
-
-    navigate(`${song.ID}`, {
-      state: {
-        song,
-        songs: results,
-        index: selectedIndex,
-        collection,
-      },
-    });
-  }
-
-  useKeyboardNavigation({
-    onEnter: openSelectedSong,
-  });
 
   return (
     <main>
@@ -82,7 +56,6 @@ export default function SearchList() {
       <List
         songs={results}
         collection={collection}
-        onSelect={setSelectedIndex}
       />
     </main>
   );

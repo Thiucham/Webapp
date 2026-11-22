@@ -20,7 +20,6 @@ export default function SlideTrack({
   onIndexChange,
   className = "",
   threshold = 50,
-  duration = 350,
   onSlideClick,
 }: SlideTrackProps) {
   const totalSlides = children.length;
@@ -62,7 +61,7 @@ export default function SlideTrack({
           transform: `translateX(calc(-${currentIndex * 100}% + ${offsetX}px))`,
           transition: isDragging
             ? "none"
-            : `transform ${duration}ms ease`,
+            : `transform 350ms ease`,
         }}
       >
         {children.map((child, index) => (

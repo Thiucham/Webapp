@@ -1,30 +1,24 @@
-import {
-  useLocation,
-  useNavigate,
-} from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useState } from "react";
 
-import { useFavourites } from "../contexts/FavouritesProvider.tsx";
+import { useFavourites } from "~/features/app/contexts/FavouritesProvider.tsx";
 
-import useSwipe from "../hooks/useSwipe.ts";
-import useKeyboardNavigation from "../hooks/useKeyboardNavigation.ts";
+import useSongData from "./hooks/useSongData.ts";
+
+import useSwipe from "~/features/app/hooks/useSwipe.ts";
+import useKeyboardNavigation from "~/features/app/hooks/useKeyboardNavigation.ts";
+
+import useLyricsSections from "./hooks/useLyricsSections.ts";
+
+import ScreenBackDrop from "~/features/app/components/ui/ScreenBackDrop.tsx";
+
+import DetailHeader from "./components/DetailHeader.tsx";
+import DetailActions from "./components/DetailActions.tsx";
+import LyricsContent from "./components/LyricsContent.tsx";
+import MoreOptions from "./components/MoreOptions.tsx";
+import ProjectionIcon from "~/features/app/components/ui/icons/ProjectionIcon.tsx";
 
 import "./Details.css";
-
-const DETAIL_ORDER = [
-  ["V1", "CH-"],
-  ["CH", "V1-"],
-  ["V2", "V2-"],
-  ["V3", "V3-"],
-  ["V4", "V4-"],
-  ["V5", "V5-"],
-  ["V6", "V6-"],
-  ["V7", "V7-"],
-  ["V8", "V8-"],
-  ["V9", "V9-"],
-  ["V10", "V10-"],
-  ["V11", "V11-"],
-];
 
 export default function Details() {
   const location = useLocation();
@@ -32,19 +26,22 @@ export default function Details() {
 
   const [showHelp, setShowHelp] = useState(false);
 
-const song = location.state?.song;
-const songs = location.state?.songs;
-const index = location.state?.index;
-const collection = location.state?.collection;
+  const fallbackData = useSongData();
 
-  if (!song) return null;
+let song = location.state?.song;
+let songs;
+let index;
+let collection;
 
-   const {
-  isFavourite,
-  toggleFavourite,
-} = useFavourites();
+if (!song) {
+  ({ collection, songs, song, index } = fallbackData);
+} else {
+  songs = location.state?.songs;
+  index = location.state?.index;
+  collection = location.state?.collection;
+}
 
-  function closeDetails() {
+ function closeDetails() {
     navigate(-1);
   }
 
@@ -88,198 +85,72 @@ function previousSong() {
   });
 }
 
-const sections = DETAIL_ORDER
-  .map(([first, second]) => {
-    const key =
-      song[first]
-        ? first
-        : song[second]
-          ? second
-          : null;
+  const { isFavourite, toggleFavourite } = useFavourites();
 
-    if (!key) return null;
+  const sections = useLyricsSections(song.Lyrics);
 
-    return {
-      key,
-      text: song[key],
-    };
-  })
-  .filter(Boolean);
+  useKeyboardNavigation({
+    onNext: nextSong,
+    onPrevious: previousSong,
+    onClose: closeDetails,
+    onEnter: openProjection,
+  });
 
-useKeyboardNavigation({
-  onNext: nextSong,
-  onPrevious: previousSong,
-  onClose: closeDetails,
-  onEnter: openProjection,
-});
-
-const {
-  onTouchStart,
-  onTouchMove,
-  onTouchEnd,
-  offsetX,
-  isDragging,
-} = useSwipe({
-  onSwipeLeft: nextSong,
-  onSwipeRight: previousSong,
-});
+  const {
+    onTouchStart,
+    onTouchMove,
+    onTouchEnd,
+    offsetX,
+    isDragging,
+  } = useSwipe({
+    onSwipeLeft: nextSong,
+    onSwipeRight: previousSong,
+  });
 
   return (
     <>
       {showHelp && (
-  <div className="help-overlay">
-    <div className="help-box">
-      <button className="close"
-      onClick={() => setShowHelp(false)}>
-        ❌
-      </button>
-
-      <h4>Controls</h4>
-
-      <h5>Touch</h5>
-      <p>Swipe left — Next song</p>
-      <p>Swipe right — Previous song</p>
-      <p>Double-click lyrics — Projection</p>
-
-      <h5>Keyboard</h5>
-      <p>→ — Next song</p>
-      <p>← — Previous song</p>
-      <p>Enter — Projection</p>
-      <p>Esc — Close</p>
- </div>
-  </div>
+        <ScreenBackDrop onClose={() => setShowHelp(false)}>
+  <MoreOptions
+    onClose={() => setShowHelp(false)}
+  />
+  </ScreenBackDrop>
 )}
 
       <div className="fullscreen-overlay">
-
-    <main
-  className="details"
+        <main
+  key={song.ID}
+  className="details details--enter"
   onTouchStart={onTouchStart}
   onTouchMove={onTouchMove}
   onTouchEnd={onTouchEnd}
   style={{
-    transform: `translateX(${offsetX}px)`,
-    transition: isDragging
-      ? "none"
-      : "transform 0.35s ease",
+    transform: `translate3d(${offsetX}px, 0, 0)`,
+    transition: isDragging ? "none" : "transform 0.22s cubic-bezier(0.22, 1, 0.36, 1)",
   }}
 >
-      <div className="detail-head">
-        <div>
-            {song.ID}
-        </div>
+          <DetailHeader song={song.Header} />
 
-        <div>
-          {song.Title}
-        </div>
-      </div>
+         <DetailActions
+  isFavourite={isFavourite(collection, songId)}
+  onToggle={() => toggleFavourite(collection, songId)}
+  onMore={() => setShowHelp(true)}
+/>
 
-      {song.Translation && (
-        <div className="translation">
-          {song.Translation}
-        </div>
-      )}
+          <LyricsContent
+  sections={sections}
+  onDoubleClick={openProjection}
+/>
+        </main>
 
-  <div className="detail-meta-info">
-    <div className="song-meta-item">
-      <span className="song-meta-label">KEY</span>
-      <span className="song-meta-value">
-        {song.Key || "⚪"}
-      </span>
-    </div>
-
-    <div className="song-meta-item">
-      <span className="song-meta-label">TIME</span>
-      <span className="song-meta-value">
-        {song["Time signature"] || "⚪"}
-      </span>
-    </div>
-  </div>
-
-  <div className="detail-actions">
-    <button
-    aria-label="Toggle-Favourites"
-  onClick={() => toggleFavourite(collection, song.ID)}
->
-  {isFavourite(collection, song.ID) ? "⭐" : "☆"}
-</button>
-
-    <button
-      onClick={() => setShowHelp(true)}
-      aria-label="Help"
-    >ⓘ
-    </button>
-
-    <button
-      aria-label="Suggest a correction"
-      onClick={() => {
-    const originalLyrics = sections
-      .map(({ text }) => text)
-      .join("\n\n");
-
-    const correction = {
-      collection,
-      songId: song.ID,
-      title: song.Title,
-      originalLyrics,
-    };
-
-    const identityToken = localStorage.getItem("identityToken");
-
-    if (identityToken) {
-      navigate("../suggest-correction", {
-        state: { correction },
-      });
-      return;
-    }
-
-    navigate("/sign-in", {
-      state: {
-        correction,
-        returnTo: location.pathname.replace(
-      /\/[^/]+$/,
-      "/suggest-correction"
-    ),
-      },
-    });
-  }}
-    >✎
-    </button>
-  </div>
-
-
-      <div className="lyrics-container"
-      onDoubleClick={openProjection}
-      >
-       {sections.map(({ key, text }) => (
-  <div
-    key={key}
-    className="lyrics"
-  >
-    {text}
-  </div>
-))}
-      </div>
-    </main>
-
-    <button className="projection" onClick={openProjection} aria-label="Open projection">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+        <button
+      className="projection"
+      onClick={openProjection}
+      aria-label="Open projection"
     >
-      <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1" />
-      <path d="m12 15 5 6H7l5-6z" />
-    </svg>
-  </button>
-
-     </div>
-     </>
+      <ProjectionIcon />
+    </button>
+      </div>
+    </>
   );
 }

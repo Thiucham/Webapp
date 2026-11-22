@@ -4,6 +4,8 @@ type DetailActionsProps = {
   onMore: () => void;
 };
 
+import "./DetailActions.css";
+
 export default function DetailActions({
   isFavourite,
   onToggle,

@@ -1,0 +1,10 @@
+.lyrics-container {
+  margin-top: var(--space-xl);
+}
+
+.lyrics {
+  white-space: pre-line;
+  font-size: var( --font-large);
+  line-height: 1.6;
+  margin-bottom: var(--space-xl);
+}

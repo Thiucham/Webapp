@@ -1,12 +1,14 @@
-type TransparentOverlayProps = {
+type ScreenBackDropProps = {
   children: React.ReactNode;
   onClose?: () => void;
 };
 
-export default function TransparentOverlay({
+import "./ScreenBackDrop.css";
+
+export default function ScreenBackDrop({
   children,
   onClose,
-}: TransparentOverlayProps) {
+}: ScreenBackDropProps) {
   return (
     <div
       className="transparent-overlay"

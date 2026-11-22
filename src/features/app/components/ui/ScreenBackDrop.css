@@ -1,0 +1,10 @@
+.transparent-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: transparent;
+}
+
+.transparent-overlay-content {
+  position: relative;
+}

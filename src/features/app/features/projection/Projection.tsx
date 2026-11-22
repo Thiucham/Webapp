@@ -6,8 +6,6 @@ import useControlsVisibility from "../hooks/useControlsVisibility.ts";
 import useSwipe from "../hooks/useSwipe.ts";
 import useKeyboardNavigation from "../hooks/useKeyboardNavigation.ts";
 
-import SlideTrack from "~/features/app/components/ui/SlideTrack.tsx";
-
 import "./Projection.css";
 
 const PROJECTION_ORDER = [
@@ -44,39 +42,37 @@ export default function Projection() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useFullscreen(song);
-  const {
-  showControls,
-  show,
-} = useControlsVisibility();
 
-  if (!song) return null;
+  const { showControls, show } = useControlsVisibility();
 
   const lyrics = [];
 
   let useFirst = null;
 
-  for (const [first, second] of PROJECTION_ORDER) {
-    if (useFirst === null) {
-      if (song[first]) {
-        useFirst = true;
-      } else if (song[second]) {
-        useFirst = false;
-      } else {
-        continue;
-      }
-    }
-
-    const key = useFirst ? first : second;
-
-    if (!song[key]) {
-      if (key.startsWith("CH")) {
-        continue;
+  if (song) {
+    for (const [first, second] of PROJECTION_ORDER) {
+      if (useFirst === null) {
+        if (song[first]) {
+          useFirst = true;
+        } else if (song[second]) {
+          useFirst = false;
+        } else {
+          continue;
+        }
       }
 
-      break;
-    }
+      const key = useFirst ? first : second;
 
-    lyrics.push(song[key]);
+      if (!song[key]) {
+        if (key.startsWith("CH")) {
+          continue;
+        }
+
+        break;
+      }
+
+      lyrics.push(song[key]);
+    }
   }
 
   function closeProjection() {
@@ -96,53 +92,65 @@ export default function Projection() {
   }
 
   useKeyboardNavigation({
-  onNext: nextSlide,
-  onPrevious: previousSlide,
-  onClose: closeProjection,
-   mode: "projection",
-});
+    onNext: nextSlide,
+    onPrevious: previousSlide,
+    onClose: closeProjection,
+    mode: "projection",
+  });
 
   const {
-  onTouchStart,
-  onTouchMove,
-  onTouchEnd,
-  offsetX,
-  isDragging,
-} = useSwipe({
-  onSwipeLeft: nextSlide,
-  onSwipeRight: previousSlide,
-  threshold: 50,
-});
+    onTouchStart,
+    onTouchMove,
+    onTouchEnd,
+    offsetX,
+    isDragging,
+  } = useSwipe({
+    onSwipeLeft: nextSlide,
+    onSwipeRight: previousSlide,
+    threshold: 50,
+  });
+
+  if (!song) return null;
 
   return (
     <div className="projection">
-
-<SlideTrack
-  currentIndex={currentSlide}
-  onIndexChange={setCurrentSlide}
-  threshold={50}
-  duration={350}
-  slides={lyrics.map((lyric, index) => (
-    <div
-      key={index}
-      className="projection-slide"
-      onClick={show}
-    >
-      <div className="lyrics">
-        {lyric}
+      <div
+        className="projection-viewport"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
+        <div
+          className="projection-track"
+          style={{
+            transform: `translateX(calc(-${currentSlide * 100}% + ${offsetX}px))`,
+            transition: isDragging
+              ? "none"
+              : "transform 350ms ease",
+          }}
+        >
+          {lyrics.map((lyric, index) => (
+            <div
+              key={index}
+              className="projection-slide"
+              onClick={show}
+            >
+              <div className="lyrics">
+                {lyric}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  ))}
-/>
 
       {showControls && (
-    <button
-      className="projection-close"
-      onClick={closeProjection}
-    >
-      ❌
-    </button>
-  )}
+        <button
+          className="projection-close"
+          onClick={closeProjection}
+        >
+          ❌
+        </button>
+      )}
     </div>
   );
 }

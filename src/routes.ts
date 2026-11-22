@@ -3,10 +3,10 @@ import {
   prefix,
 } from "@react-router/dev/routes";
 
-import websiteRoutes from "./routes/website.routes.ts";
+import siteRoutes from "./routes/site.routes.ts";
 import appRoutes from "./routes/app.routes.ts";
 
 export default [
-  ...websiteRoutes,
+  ...siteRoutes,
   ...prefix("app", appRoutes),
 ] satisfies RouteConfig;

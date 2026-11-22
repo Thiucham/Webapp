@@ -1,0 +1,44 @@
+.detail-head {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+.detail-head > div:first-child {
+  font-size: var(--font-large);
+  margin-bottom: var(--space-sm);
+}
+
+.detail-head > div:last-child {
+  font-size: var(--font-title);
+  font-weight: var(--font-weight-bold);
+}
+
+.translation {
+  text-align: center;
+  font-size: var( --font-medium);
+  font-style: italic;
+  opacity: 0.9;
+  margin-bottom: var(--space-xl);
+}
+
+.detail-meta-info {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xl);
+}
+
+.song-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.song-meta-label {
+  font-size: var(--font-small);
+  font-weight: 300;
+}
+
+.song-meta-value {
+  font-size: var(--font-medium);
+  font-weight: 600;
+}

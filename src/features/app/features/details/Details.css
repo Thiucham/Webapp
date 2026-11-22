@@ -1,31 +1,25 @@
 .details {
   min-height: 100%;
   padding: 3.8rem 1rem 6.5rem;
+  will-change: transform;
   touch-action: pan-y;
 }
 
-.detail-head {
-  text-align: center;
-  margin-bottom: var(--space-md);
+@keyframes songEnter {
+  from {
+    opacity: 0.85;
+    transform: translate3d(24px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-.detail-head > div:first-child {
-  font-size: var(--font-large);
-  margin-bottom: var(--space-sm);
+.details--enter {
+  animation: songEnter 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.detail-head > div:last-child {
-  font-size: var(--font-title);
-  font-weight: var(--font-weight-bold);
-}
-
-.translation {
-  text-align: center;
-  font-size: var( --font-medium);
-  font-style: italic;
-  opacity: 0.9;
-  margin-bottom: var(--space-xl);
-}
 
 .help-overlay {
   position: fixed;
@@ -39,78 +33,5 @@
   background: rgba(0, 0, 0, 0.35);
  overflow-y: auto;
   z-index: 100;
-}
-
-.help-box {
-  position: relative;
-
-  width: min(85%, 360px);
-
-  padding: var(--space-md);
-margin: auto 0;
-  background: #fff;
-  border-radius: 12px;
-}
-
-.help-box .close {
-  background: none;
-
-  font-size: var(--font-medium);
-  cursor: pointer;
-   border: none;
-   position: absolute;
-    top: 0.75rem;
-  right: 0.75rem;
-}
-
-.lyrics-container {
-  margin-top: var(--space-xl);
-}
-
-.lyrics {
-  white-space: pre-line;
-  font-size: var( --font-large);
-  line-height: 1.6;
-  margin-bottom: var(--space-xl);
-}
-
-.detail-meta-info {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-xl);
-}
-
-.song-meta-item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-}
-
-.song-meta-label {
-  font-size: var(--font-small);
-  font-weight: 300;
-}
-
-.song-meta-value {
-  font-size: var(--font-medium);
-  font-weight: 600;
-}
-
-.detail-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xl);
-  margin-top: var(--space-sm);
-}
-
-.detail-actions button {
-  width: 28px;
-  height: 28px;
-  padding: 0;
-
-  border: none;
-  background: none;
-  font-size: var(--font-large);
-  cursor: pointer;
 }
 

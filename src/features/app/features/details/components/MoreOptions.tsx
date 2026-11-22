@@ -1,15 +1,8 @@
-import TransparentOverlay from "~/features/app/components/ui/TransparentOverlay.tsx";
+import "./MoreOptions.css";
 
-type MoreOptionsProps = {
-  onClose: () => void;
-};
-
-export default function MoreOptions({
-  onClose,
-}: MoreOptionsProps) {
+export default function MoreOptions() {
 
   return (
-    <TransparentOverlay onClose={onClose}>
       <div className="more-options">
         <button
           className="close"
@@ -21,6 +14,5 @@ export default function MoreOptions({
 
         {/* More options will go here */}
       </div>
-    </TransparentOverlay>
   );
 }

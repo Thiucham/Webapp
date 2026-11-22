@@ -1,0 +1,19 @@
+.more-options {
+  width: min(85%, 360px);
+
+  padding: var(--space-md);
+margin: auto 0;
+  background: #fff;
+  border-radius: 12px;
+}
+
+.more-options .close {
+  background: none;
+
+  font-size: var(--font-medium);
+  cursor: pointer;
+   border: none;
+   position: absolute;
+    top: 0.75rem;
+  right: 0.75rem;
+}

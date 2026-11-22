@@ -8,6 +8,8 @@ type LyricsContentProps = {
   onDoubleClick: () => void;
 };
 
+import "./LyricsContent.css";
+
 export default function LyricsContent({
   sections,
   onDoubleClick,
