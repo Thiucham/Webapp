@@ -1,9 +1,20 @@
-import { Outlet, useLocation } from "react-router";
+import {
+  Outlet,
+  useLoaderData,
+  useLocation,
+  type ClientLoaderFunctionArgs,
+} from "react-router";
+
+import { CollectionLoader } from "~/features/app/loaders/CollectionLoader";
 
 import "../styles/AppLayout.css";
 
 import TopBar from "./TopBar.tsx.tsx";
 import BottomBar from "./BottomBar.tsx.tsx";
+
+export async function clientLoader(args: ClientLoaderFunctionArgs) {
+  return CollectionLoader(args);
+}
 
 export default function AppLayout() {
   const location = useLocation();

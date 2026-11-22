@@ -17,11 +17,9 @@ export default defineConfig({
         name: "Thiucham",
         short_name: "Thiucham",
         description: "Thiucham Web App",
-
         theme_color: "#ffffff",
         background_color: "#ffffff",
         display: "standalone",
-
         start_url: "/Webapp/app/",
         scope: "/Webapp/app/",
 
@@ -46,6 +44,10 @@ export default defineConfig({
       },
     }),
   ],
+
+  resolve: {
+    tsconfigPaths: true,
+  },
 
   server: {
     host: true,

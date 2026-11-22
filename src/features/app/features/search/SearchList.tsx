@@ -5,7 +5,7 @@ import {
   useRouteLoaderData,
 } from "react-router";
 
-import { loader } from "~features/app/components/layouts/AppLayout";
+import type { clientLoader } from "~/features/app/components/layouts/AppLayout";
 
 import List from "../components/List.tsx";
 import "./Search.css";
@@ -20,7 +20,7 @@ export default function SearchList() {
   const { collection } = useParams();
   const navigate = useNavigate();
 
-  const songs = useRouteLoaderData<typeof loader>("app-layout");
+  const songs = useRouteLoaderData<typeof clientLoader>("app-layout");
 
   const [query, setQuery] = useState("");
 

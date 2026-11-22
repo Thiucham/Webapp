@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import Favourites from "../pages/favourites.tsx";
+import Favourites from "./favourites.tsx";
 
 export default function FavouritesShell() {
   return (

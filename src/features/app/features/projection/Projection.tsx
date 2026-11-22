@@ -92,7 +92,11 @@ export default function Projection() {
 
   const totalSlides = lyrics.length;
 const lastSlide = totalSlides - 1;
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> d5d5e1a (update for today.)
   function closeProjection() {
     navigate(-1);
   }

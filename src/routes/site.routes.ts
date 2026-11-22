@@ -4,5 +4,5 @@ import {
 } from "@react-router/dev/routes";
 
 export default [
-  index("~features/site/Home.tsx"),
+  index("features/site/Home.tsx"),
 ] satisfies RouteConfig;
