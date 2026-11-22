@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   useRouteLoaderData,
   useParams,
@@ -12,19 +11,11 @@ import "./CollectionList.css";
 import List from "~/features/app/components/ui/List.tsx";
 import useSwipe from "~/features/app/hooks/useSwipe.ts";
 
-const COLLECTIONS = [
-  "Hiuna-Khomlui",
-  "Khristen-Madui-Lui",
-  "Luisan",
-];
-
 export default function CollectionList() {
 const songs = useRouteLoaderData("app-layout");
 
   const { collection } = useParams();
   const navigate = useNavigate();
-
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const {
     onTouchStart,
@@ -54,7 +45,6 @@ const songs = useRouteLoaderData("app-layout");
         <List
           songs={songs}
           collection={collection}
-          onSelect={setSelectedIndex}
         />
       </main>
     </div>

@@ -7,10 +7,6 @@ export default function useFullscreen(enabled) {
     async function enterFullscreen() {
       try {
         await document.documentElement.requestFullscreen();
-
-        if (window.innerHeight > window.innerWidth) {
-          await screen.orientation?.lock("landscape");
-        }
       } catch {}
     }
 

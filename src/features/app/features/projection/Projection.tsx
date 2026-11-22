@@ -40,8 +40,23 @@ export default function Projection() {
   const song = location.state?.song;
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [orientationLocked, setOrientationLocked] = useState(false);
 
   useFullscreen(song);
+
+  async function toggleOrientation() {
+  try {
+    if (orientationLocked) {
+      screen.orientation?.unlock();
+      setOrientationLocked(false);
+    } else {
+      await screen.orientation?.lock("landscape");
+      setOrientationLocked(true);
+    }
+  } catch (error) {
+    console.error("Orientation error:", error);
+  }
+  }
 
   const { showControls, show } = useControlsVisibility();
 
@@ -75,13 +90,16 @@ export default function Projection() {
     }
   }
 
+  const totalSlides = lyrics.length;
+const lastSlide = totalSlides - 1;
+  
   function closeProjection() {
     navigate(-1);
   }
 
   function nextSlide() {
     setCurrentSlide((current) =>
-      Math.min(current + 1, lyrics.length - 1)
+      Math.min(current + 1, lastSlide)
     );
   }
 
@@ -113,7 +131,7 @@ export default function Projection() {
   if (!song) return null;
 
   return (
-    <div className="projection">
+    <div className="projection-main">
       <div
         className="projection-viewport"
         onTouchStart={onTouchStart}
@@ -144,13 +162,26 @@ export default function Projection() {
       </div>
 
       {showControls && (
-        <button
-          className="projection-close"
-          onClick={closeProjection}
-        >
-          ❌
-        </button>
-      )}
+  <>
+    <button
+      className="projection-close"
+      onClick={closeProjection}
+    >
+      ❌
+    </button>
+
+    <div className="projection-counter">
+      {currentSlide + 1} / {totalSlides}
+    </div>
+
+    <button
+      className="projection-rotate"
+      onClick={toggleOrientation}
+    >
+      Rotate
+    </button>
+  </>
+)}
     </div>
   );
 }
