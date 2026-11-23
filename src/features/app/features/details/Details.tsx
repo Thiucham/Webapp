@@ -119,8 +119,11 @@ function previousSong() {
 
       <div className="fullscreen-overlay">
         <main
-  key={song.ID}
-  className="details details--enter"
+  className={`details ${
+    direction === "left"
+      ? "details--enter-left"
+      : "details--enter-right"
+  }`}
   onTouchStart={onTouchStart}
   onTouchMove={onTouchMove}
   onTouchEnd={onTouchEnd}

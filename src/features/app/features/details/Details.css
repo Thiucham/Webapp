@@ -5,21 +5,37 @@
   touch-action: pan-y;
 }
 
-@keyframes songEnter {
+@keyframes songEnterFromRight {
   from {
     opacity: 0.85;
     transform: translate3d(24px, 0, 0);
   }
+
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
 }
 
-.details--enter {
-  animation: songEnter 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+@keyframes songEnterFromLeft {
+  from {
+    opacity: 0.85;
+    transform: translate3d(-24px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
+.details--enter-right {
+  animation: songEnterFromRight 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.details--enter-left {
+  animation: songEnterFromLeft 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
 
 .help-overlay {
   position: fixed;

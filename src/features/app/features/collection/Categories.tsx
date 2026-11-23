@@ -11,7 +11,7 @@ type CategoryGroups = {
   };
 };
 
-export default function CategoriesList() {
+export default function Categories() {
   const songs = useRouteLoaderData<typeof clientLoader>("app-layout");
 
   const { collection } = useParams();
