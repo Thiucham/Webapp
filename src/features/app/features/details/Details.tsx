@@ -47,7 +47,7 @@ if (!song) {
 
   function openProjection() {
   navigate("../projection", {
-    state: { song },
+    state: { lyrics: song.Lyrics },
   });
 }
 

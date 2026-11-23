@@ -8,12 +8,12 @@ import {
 
 import { CollectionLoader } from "~/features/app/loaders/CollectionLoader";
 
-import "../styles/AppLayout.css";
+import "./AppLayout.css";
 
 import TopBar from "./TopBar.tsx";
-import BottomBar from "./BottomBar.tsx";
 
 export interface AppOutletContext {
+  collection: string | null;
   songs: any;
 }
 
@@ -22,21 +22,17 @@ export async function clientLoader(args: ClientLoaderFunctionArgs) {
 }
 
 export default function AppLayout() {
-  const { songs } = useLoaderData<typeof clientLoader>();
+  const { collection, songs } = useLoaderData<typeof clientLoader>();
   const location = useLocation();
   const path = location.pathname.split("/").filter(Boolean);
-
-  const showBottomBar = path.length <= 2;
 
   return (
     <div className="app-layout">
       <TopBar path={path} />
 
       <main className="app-content">
-        <Outlet context={{ songs } satisfies AppOutletContext} />
+        <Outlet context={{ collection, songs } satisfies AppOutletContext} />
       </main>
-
-      {showBottomBar && <BottomBar />}
     </div>
   );
 }

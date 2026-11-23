@@ -5,7 +5,7 @@ export async function AllCollectionsLoader() {
     "Hiuna-Khomlui",
   ];
 
-  const allSongs = [];
+  const songs = {};
 
   for (const collection of collections) {
     const response = await fetch(
@@ -20,12 +20,11 @@ export async function AllCollectionsLoader() {
 
     const data = await response.json();
 
-    if (Array.isArray(data)) {
-      allSongs.push(...data);
-    } else if (Array.isArray(data?.songs)) {
-      allSongs.push(...data.songs);
-    }
+    songs[collection] = data;
   }
 
-  return { songs: allSongs };
+  return {
+    collection: null,
+    songs
+    };
 }

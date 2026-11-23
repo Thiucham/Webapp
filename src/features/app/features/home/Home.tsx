@@ -13,15 +13,15 @@ export default function Home() {
 
       <div className="home-collections">
         <button onClick={() => navigate("/Hiuna-Khomlui/list")}>
-          ▸ Hiuna Khomlui
+          Hiuna Khomlui
         </button>
 
         <button onClick={() => navigate("/Khristen-Madui-Lui/list")}>
-          ▸ Khristen Madui Lui
+          Khristen Madui Lui
         </button>
 
         <button onClick={() => navigate("/Luisan/list")}>
-          ▸ Luisan
+          Luisan
         </button>
          <button
         className="home-favourites"

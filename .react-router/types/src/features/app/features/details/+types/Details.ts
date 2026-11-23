@@ -22,22 +22,7 @@ type Matches = [{
   id: "features/app/features/collection/CollectionShell";
   module: typeof import("../../collection/CollectionShell.js");
 }, {
-  id: "list-details";
-  module: typeof import("../Details.js");
-}] | [{
-  id: "root";
-  module: typeof import("../../../../../root.js");
-}, {
-  id: "features/app/components/layouts/AppLayout";
-  module: typeof import("../../../components/layouts/AppLayout.js");
-}, {
-  id: "features/app/contexts/FavouritesProvider";
-  module: typeof import("../../../contexts/FavouritesProvider.js");
-}, {
-  id: "features/app/features/categories/CategoriesShell";
-  module: typeof import("../../categories/CategoriesShell.js");
-}, {
-  id: "cat-details";
+  id: "collection-details";
   module: typeof import("../Details.js");
 }] | [{
   id: "root";
@@ -53,21 +38,6 @@ type Matches = [{
   module: typeof import("../../search/SearchShell.js");
 }, {
   id: "search-details";
-  module: typeof import("../Details.js");
-}] | [{
-  id: "root";
-  module: typeof import("../../../../../root.js");
-}, {
-  id: "features/app/components/layouts/AppLayout";
-  module: typeof import("../../../components/layouts/AppLayout.js");
-}, {
-  id: "features/app/contexts/FavouritesProvider";
-  module: typeof import("../../../contexts/FavouritesProvider.js");
-}, {
-  id: "features/app/features/favourite/FavouritesShell";
-  module: typeof import("../../favourite/FavouritesShell.js");
-}, {
-  id: "collection-fav-details";
   module: typeof import("../Details.js");
 }] | [{
   id: "root";

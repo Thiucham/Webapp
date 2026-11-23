@@ -1,6 +1,4 @@
-import { useRouteLoaderData, useParams } from "react-router";
-
-import type { clientLoader } from "~/features/app/components/layouts/AppLayout";
+import { useAppOutletContext } from "~/features/app/components/layouts/AppLayout";
 
 import HeaderList from "~/features/app/components/ui/HeaderList";
 
@@ -12,9 +10,7 @@ type CategoryGroups = {
 };
 
 export default function Categories() {
-  const songs = useRouteLoaderData<typeof clientLoader>("app-layout");
-
-  const { collection } = useParams();
+  const { songs, collection } = useAppOutletContext();
 
   const grouped: CategoryGroups = {};
 

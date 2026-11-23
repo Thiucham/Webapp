@@ -1,21 +1,12 @@
 import { AllCollectionsLoader } from "./AllCollectionsLoader";
 
 export async function CollectionLoader({
-  params,
+  params: { collection },
 }: {
   params: { collection?: string };
 }) {
-
-  if (!params.collection) {
-    return await AllCollectionsLoader();
-  }
-
-  const collection = params.collection;
-
   if (!collection) {
-    throw new Response("Collection not found", {
-      status: 404,
-    });
+    return await AllCollectionsLoader();
   }
 
   const response = await fetch(
@@ -28,5 +19,8 @@ export async function CollectionLoader({
     });
   }
 
-  return response.json();
+  return {
+    collection,
+    songs: await response.json(),
+  };
 }

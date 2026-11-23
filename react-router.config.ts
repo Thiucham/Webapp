@@ -10,18 +10,17 @@ export default {
 
     const paths = [
       "/",
-      "/sign-in",
-      "/Favourites/list",
+      "/app",
+      "/app/sign-in",
     ];
 
-    for (const col of collections) {
-      paths.push(`/${col.name}/list`);
-      paths.push(`/${col.name}/categories`);
-      for (let i = 1; i <= col.count; i++) {
-        paths.push(`/${col.name}/list/${i}`);
-        paths.push(`/${col.name}/categories/${i}`);
-      }
-    }
+   for (const { name, count } of collections) {
+  paths.push(`/app/${name}/list`);
+
+  for (let i = 1; i <= count; i++) {
+    paths.push(`/app/${name}/list/${i}`);
+  }
+}
 
     return paths;
   },

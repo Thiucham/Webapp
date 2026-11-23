@@ -4,6 +4,8 @@ import { reactRouter } from "@react-router/dev/vite";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
+  base: "/Webapp/",
+
   plugins: [
     reactRouter({
       appDirectory: "src",

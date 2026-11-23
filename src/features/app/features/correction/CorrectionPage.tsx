@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router";
 import { useState } from "react";
 
 import "./CorrectionPage.css";
-import { API_URL } from "~/features/app/api/config.tsx";
+import { API_URL } from "~/features/app/api/config.ts";
 
 export default function CorrectionPage() {
   const location = useLocation();

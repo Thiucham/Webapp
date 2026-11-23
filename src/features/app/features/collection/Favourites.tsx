@@ -1,55 +1,42 @@
 import { useEffect, useState } from "react";
 
-import HeaderList from "../components/HeaderList.tsx";
+import { useAppOutletContext } from "~/features/app/components/layouts/AppLayout";
+import List from "~/features/app/components/ui/List.tsx";
 
 const STORAGE_KEY = "favourites";
 
 export default function Favourites() {
-  const [groups, setGroups] = useState({});
+  const { songs, collection } = useAppOutletContext();
+
+  const [favouriteSongs, setFavouriteSongs] = useState<any[]>([]);
 
   useEffect(() => {
-    async function loadFavourites() {
-      const stored = JSON.parse(
-        localStorage.getItem(STORAGE_KEY) || "{}"
-      );
+    const stored = JSON.parse(
+      localStorage.getItem(STORAGE_KEY) || "{}"
+    );
 
-      const result = {};
+    const favouriteIds = stored[collection] || [];
 
-      for (const collection of Object.keys(stored)) {
-        const favouriteIds = stored[collection];
+    const filteredSongs = songs.filter((song) =>
+      favouriteIds.includes(String(song.ID))
+    );
 
-        if (
-          !Array.isArray(favouriteIds) ||
-          favouriteIds.length === 0
-        ) {
-          continue;
-        }
+    setFavouriteSongs(filteredSongs);
+  }, [songs, collection]);
 
-        const response = await fetch(
-  `${import.meta.env.BASE_URL}data/${collection}.json`
-);
+  if (favouriteSongs.length === 0) {
+    return (
+      <main>
+        <h2>No favourites yet</h2>
+        <p>You have no favourite songs in this <strong>{collection}</strong>.</p>
+      </main>
+    );
+  }
 
-        if (!response.ok) {
-          throw new Error(
-            `Failed to load ${collection}`
-          );
-        }
-
-        const songs = await response.json();
-
-       result[collection] = {
-  songs: songs.filter((song) =>
-    favouriteIds.includes(String(song.ID))
-  ),
-  collection,
-};
-      }
-
-      setGroups(result);
-    }
-
-    loadFavourites().catch(console.error);
-  }, []);
-
-  return <HeaderList groups={groups} />;
+  return (
+    <List
+      songs={favouriteSongs}
+      collection={collection}
+    />
+  );
 }

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 
-import useFullscreen from "../hooks/useFullscreen.ts";
-import useControlsVisibility from "../hooks/useControlsVisibility.ts";
-import useSwipe from "../hooks/useSwipe.ts";
-import useKeyboardNavigation from "../hooks/useKeyboardNavigation.ts";
+import useFullscreen from "~/features/app/hooks/useFullscreen.ts";
+import useControlsVisibility from "~/features/app/hooks/useControlsVisibility.ts";
+import useSwipe from "~/features/app/hooks/useSwipe.ts";
+import useKeyboardNavigation from "~/features/app/hooks/useKeyboardNavigation.ts";
 
 import "./Projection.css";
 
@@ -37,7 +37,7 @@ export default function Projection() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const song = location.state?.song;
+  const song = location.state?.lyrics;
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [orientationLocked, setOrientationLocked] = useState(false);

@@ -1,12 +1,15 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import { registerSW } from "virtual:pwa-register";
 
-import "./styles/Variables.css";
-import "./styles/Global.css";
-import "./styles/Utilities.css";
+import "~/features/app/styles/Variables.css";
+import "~/features/app/styles/Global.css";
+import "~/features/app/styles/Utilities.css";
+import { useEffect } from "react";
 
 export default function Root() {
-  registerSW();
+  useEffect(() => {
+    registerSW();
+  }, []);
 
   return (
     <html lang="en">
@@ -19,7 +22,7 @@ export default function Root() {
           rel="icon"
           type="image/png"
           sizes="192x192"
-          href="/Webapp/icon-192.png"
+          href="/Webapp/icons/icon-192.png"
         />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,8 +33,11 @@ export default function Root() {
         />
 
         <title>Thiucham</title>
-        <Meta />
-        <Links />
+        <meta
+  name="description"
+  content="Thiucham - Your collection of songs and lyrics."
+/>
+        <link rel="manifest" href="/Webapp/manifest.webmanifest" />
       </head>
       <body>
         <div id="root">

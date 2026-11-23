@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { useRouteLoaderData } from "react-router";
 
-import type { clientLoader } from "~/features/app/components/layouts/AppLayout";
+import { useAppOutletContext } from "~/features/app/components/layouts/AppLayout";
 
 import HeaderList from "~/features/app/components/ui/HeaderList.tsx";
 
 const STORAGE_KEY = "favourites";
 
 export default function Favourites() {
-  const collections = useRouteLoaderData<typeof clientLoader>("app-layout");
+  const collections =useAppOutletContext();
 
   const [groups, setGroups] = useState<any>({});
 

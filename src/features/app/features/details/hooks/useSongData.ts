@@ -1,14 +1,13 @@
 import {
-  useRouteLoaderData,
-  useParams,
+  useParams
 } from "react-router";
 
-import type { loader } from "~features/app/components/layouts/AppLayout";
+import { useAppOutletContext }from "~/features/app/components/layouts/AppLayout";
 
 export default function useSongData() {
-  const { collection, songId } = useParams();
+  const { songId } = useParams();
 
-  const songs = useRouteLoaderData<typeof loader>("app-layout");
+  const { songs, collection } = useAppOutletContext();
 
   const index = songs?.findIndex(
     (song) => String(song.id) === songId

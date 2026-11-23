@@ -1,13 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  useNavigate,
-  useParams,
-  useRouteLoaderData,
+  useNavigate
 } from "react-router";
 
-import type { clientLoader } from "~/features/app/components/layouts/AppLayout";
+import { useAppOutletContext } from "~/features/app/components/layouts/AppLayout";
 
-import List from "../components/List.tsx";
+import List from "~/features/app/components/ui/List.tsx";
 import "./Search.css";
 
 function normalize(str) {
@@ -17,10 +15,9 @@ function normalize(str) {
 }
 
 export default function SearchList() {
-  const { collection } = useParams();
   const navigate = useNavigate();
 
-  const songs = useRouteLoaderData<typeof clientLoader>("app-layout");
+  const { songs, collection } = useAppOutletContext();
 
   const [query, setQuery] = useState("");
 

@@ -1,6 +1,5 @@
 import { type RouteConfig, layout, route, index } from "@react-router/dev/routes";
 
-// Reusable page paths (relative to `src/`, no `~/`)
 const DETAILS_PAGE = "features/app/features/details/Details.tsx";
 const CORRECTION_PAGE = "features/app/features/correction/CorrectionPage.tsx";
 const PROJECTION_PAGE = "features/app/features/projection/Projection.tsx";
@@ -14,29 +13,15 @@ export default [
     [
       layout("features/app/contexts/FavouritesProvider.tsx", [
         route(
-          ":collection/list",
+          ":collection/:view",
           "features/app/features/collection/CollectionShell.tsx",
           [
-            route(":songId", DETAILS_PAGE, { id: "list-details" }),
+            route(":songId", DETAILS_PAGE, { id: "collection-details" }),
             route("suggest-correction", CORRECTION_PAGE, {
-              id: "list-correction",
+              id: "collection-correction",
             }),
             route("projection", PROJECTION_PAGE, {
-              id: "list-projection",
-            }),
-          ]
-        ),
-
-        route(
-          ":collection/categories",
-          "features/app/features/categories/CategoriesShell.tsx",
-          [
-            route(":songId", DETAILS_PAGE, { id: "cat-details" }),
-            route("suggest-correction", CORRECTION_PAGE, {
-              id: "cat-correction",
-            }),
-            route("projection", PROJECTION_PAGE, {
-              id: "cat-projection",
+              id: "collection-projection",
             }),
           ]
         ),
@@ -51,22 +36,6 @@ export default [
             }),
             route("projection", PROJECTION_PAGE, {
               id: "search-projection",
-            }),
-          ]
-        ),
-
-        route(
-          ":collection/favourite",
-          "features/app/features/favourite/FavouritesShell.tsx",
-          [
-            route(":songId", DETAILS_PAGE, {
-              id: "collection-fav-details",
-            }),
-            route("suggest-correction", CORRECTION_PAGE, {
-              id: "collection-fav-correction",
-            }),
-            route("projection", PROJECTION_PAGE, {
-              id: "collection-fav-projection",
             }),
           ]
         ),
