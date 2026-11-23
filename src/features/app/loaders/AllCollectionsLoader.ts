@@ -5,7 +5,7 @@ export async function AllCollectionsLoader() {
     "Hiuna-Khomlui",
   ];
 
-  const result = {};
+  const allSongs = [];
 
   for (const collection of collections) {
     const response = await fetch(
@@ -18,8 +18,14 @@ export async function AllCollectionsLoader() {
       });
     }
 
-    result[collection] = await response.json();
+    const data = await response.json();
+
+    if (Array.isArray(data)) {
+      allSongs.push(...data);
+    } else if (Array.isArray(data?.songs)) {
+      allSongs.push(...data.songs);
+    }
   }
 
-  return result;
+  return { songs: allSongs };
 }
