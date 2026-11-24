@@ -1,0 +1,1 @@
+import{i as e,n as t,t as n}from"./jsx-runtime-DyZJNswf.js";var r=e(t(),1);n();var i=(0,r.createContext)(null);function a(){let e=(0,r.useContext)(i);if(!e)throw Error(`useFavourites must be used inside FavouritesProvider`);return e}export{a as t};

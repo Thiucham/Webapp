@@ -1,12 +1,18 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, MetaFunction } from "react-router";
+import {
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from "react-router";
 import { registerSW } from "virtual:pwa-register";
+import { useEffect } from "react";
 
 import "~/features/app/styles/Variables.css";
 import "~/features/app/styles/Global.css";
 import "~/features/app/styles/Utilities.css";
-import { useEffect } from "react";
 
-export const meta: MetaFunction = () => [
+export const meta = () => [
   { title: "Thiucham" },
   {
     name: "description",
@@ -15,7 +21,8 @@ export const meta: MetaFunction = () => [
   },
   {
     name: "keywords",
-    content: "Hiuna Khomlui, Khristen Madui Lui, Luisan, Liangmai Hymnal, Liangmai Gospel Lyrics",
+    content:
+      "Hiuna Khomlui, Khristen Madui Lui, Luisan, Liangmai Hymnal, Liangmai Gospel Lyrics",
   },
 ];
 
@@ -41,7 +48,11 @@ export default function Root() {
         />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
           rel="stylesheet"

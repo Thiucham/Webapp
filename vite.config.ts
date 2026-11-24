@@ -1,4 +1,3 @@
-
 import { defineConfig } from "vite";
 import { reactRouter } from "@react-router/dev/vite";
 import { VitePWA } from "vite-plugin-pwa";
@@ -13,7 +12,7 @@ export default defineConfig({
 
     VitePWA({
       registerType: "autoUpdate",
-      scope: "/Webapp/app/",
+      scope: "/Webapp/",
 
       manifest: {
         name: "Thiucham",
@@ -23,7 +22,7 @@ export default defineConfig({
         background_color: "#ffffff",
         display: "standalone",
         start_url: "/Webapp/app/",
-        scope: "/Webapp/app/",
+        scope: "/Webapp/",
 
         icons: [
           {
@@ -40,6 +39,7 @@ export default defineConfig({
       },
 
       workbox: {
+        globDirectory: "build/client",
         globPatterns: [
           "**/*.{js,css,html,ico,png,svg,json,webp,woff2}",
         ],
@@ -54,6 +54,4 @@ export default defineConfig({
   server: {
     host: true,
   },
-
-  base: "/Webapp/",
 });

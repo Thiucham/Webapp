@@ -1,6 +1,7 @@
 export default {
   ssr: false,
   appDirectory: "src",
+  basename: "/Webapp/",
   async prerender() {
     const collections = [
       { name: "Luisan", count: 200 },
@@ -15,10 +16,10 @@ export default {
     ];
 
    for (const { name, count } of collections) {
-  paths.push(`/app/${name}/list`);
+  paths.push(`/app/${name}/AllList`);
 
   for (let i = 1; i <= count; i++) {
-    paths.push(`/app/${name}/list/${i}`);
+    paths.push(`/app/${name}/AllList/${i}`);
   }
 }
 

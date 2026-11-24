@@ -12,20 +12,20 @@ export default function Home() {
       <p>Choose a collection</p>
 
       <div className="home-collections">
-        <button onClick={() => navigate("/Hiuna-Khomlui/list")}>
+        <button onClick={() => navigate("/app/Hiuna-Khomlui/AllList")}>
           Hiuna Khomlui
         </button>
 
-        <button onClick={() => navigate("/Khristen-Madui-Lui/list")}>
+        <button onClick={() => navigate("/app/Khristen-Madui-Lui/AllList")}>
           Khristen Madui Lui
         </button>
 
-        <button onClick={() => navigate("/Luisan/list")}>
+        <button onClick={() => navigate("/app/Luisan/AllList")}>
           Luisan
         </button>
          <button
         className="home-favourites"
-        onClick={() => navigate("/favourites/list")}
+        onClick={() => navigate("/app/favourites/List")}
       >
         ⭐ Favourites
       </button>

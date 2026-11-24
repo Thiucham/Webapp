@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "react-router dev",
-    "build": "react-router build && cp build/client/index.html build/client/404.html",
+    "build": "react-router build && cp build/client/__spa-fallback.html build/client/404.html",
     "preview": "react-router preview",
     "typecheck": "react-router typegen && tsc"
   },

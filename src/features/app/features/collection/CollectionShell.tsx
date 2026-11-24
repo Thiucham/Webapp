@@ -2,7 +2,7 @@ import { Outlet,
        useParams,
        useNavigate, } from "react-router";
 
-import List from "./List.tsx";
+import AllList from "./AllList.tsx";
 import Categories from "./Categories.tsx";
 import Favourites from "./Favourites.tsx";
 
@@ -14,7 +14,7 @@ export default function CollectionShell() {
   const { view } = useParams();
 
   const Views = {
-  list: List,
+  alllist: AllList,
   categories: Categories,
   favourites: Favourites,
 };
