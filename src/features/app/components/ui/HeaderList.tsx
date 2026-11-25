@@ -1,51 +1,35 @@
 import { useState } from "react";
+import type { SongHeader } from "~/features/app/loaders/CollectionsLoader";
+import List from "./List";
 
-import List from "./List.tsx";
+type HeaderListProps = {
+  groups?: Record<string, SongHeader[]>;
+};
 
-export default function HeaderList({
-  groups = {},
-}) {
-  const [openGroup, setOpenGroup] = useState(null);
+export default function HeaderList({ groups = {} }: HeaderListProps) {
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
 
-  function toggleGroup(group) {
-    setOpenGroup((current) =>
-      current === group ? null : group
-    );
+  function toggleGroup(group: string) {
+    setOpenGroup((current) => (current === group ? null : group));
   }
 
   return (
     <main>
-      {Object.entries(groups).map(
-        ([group, data]) => {
-          const isOpen = openGroup === group;
+      {Object.entries(groups).map(([group, headers]) => {
+        const isOpen = openGroup === group;
 
-          const {
-            songs,
-            collection,
-          } = data;
+        return (
+          <section key={group}>
+            <div onClick={() => toggleGroup(group)}>
+              <h3 style={{ paddingLeft: "1rem" }}>
+                {group} ({headers.length})
+              </h3>
+            </div>
 
-          return (
-            <section
-              key={group}
-            >
-              <div
-                onClick={() => toggleGroup(group)}
-              >
-                <h3 style={{ paddingLeft: "1rem" }}>
-                  {group} ({songs.length})
-                </h3>
-              </div>
-
-              {isOpen && (
-                <List
-                  songs={songs}
-                  collection={collection}
-                />
-              )}
-            </section>
-          );
-        }
-      )}
+            {isOpen && <List headers={headers} />}
+          </section>
+        );
+      })}
     </main>
   );
 }

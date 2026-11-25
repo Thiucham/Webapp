@@ -1,19 +1,20 @@
 import { defineConfig } from "vite";
 import { reactRouter } from "@react-router/dev/vite";
 import { VitePWA } from "vite-plugin-pwa";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   base: "/Webapp/",
 
   plugins: [
-    reactRouter({
-      appDirectory: "src",
-    }),
-
+    reactRouter(),
+    tsconfigPaths(),
     VitePWA({
       registerType: "autoUpdate",
-      scope: "/Webapp/",
-
+      devOptions: {
+        enabled: true,
+        type: 'module'
+      },
       manifest: {
         name: "Thiucham",
         short_name: "Thiucham",
@@ -21,36 +22,23 @@ export default defineConfig({
         theme_color: "#ffffff",
         background_color: "#ffffff",
         display: "standalone",
-        start_url: "/Webapp/app/",
-        scope: "/Webapp/",
-
+        start_url: "./app/",
+        scope: "./",
         icons: [
           {
-            src: "/Webapp/icons/icon-192.png",
+            src: "icons/icon-192.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "/Webapp/icons/icon-512.png",
+            src: "icons/icon-512.png",
             sizes: "512x512",
             type: "image/png",
           },
         ],
       },
-
-      workbox: {
-        globDirectory: "build/client",
-        globPatterns: [
-          "**/*.{js,css,html,ico,png,svg,json,webp,woff2}",
-        ],
-      },
     }),
   ],
-
-  resolve: {
-    tsconfigPaths: true,
-  },
-
   server: {
     host: true,
   },

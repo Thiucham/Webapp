@@ -1,58 +1,44 @@
-import { useNavigate } from "react-router";
-
-import { useFavourites } from "~/features/app/contexts/FavouritesProvider.tsx";
-
+import { useNavigate, useParams } from "react-router";
+import type { SongHeader } from "~/features/app/loaders/CollectionsLoader";
+import { useFavourites } from "~/features/app/contexts/FavouritesProvider";
 import "./List.css";
 
 type ListProps = {
-  songs?: any[];
-  collection?: string;
+  headers?: SongHeader[];
 };
 
-export default function List({
-  songs = [],
-  collection,
-}: ListProps) {
-  const navigate = useNavigate();
+export const SONG_LIST_STORAGE_PREFIX = "active-song-ids:";
 
+export default function List({ headers = [] }: ListProps) {
+  const navigate = useNavigate();
+  const { collection = "" } = useParams();
   const { isFavourite } = useFavourites();
 
-  function openDetails(song: any, index: number) {
-    navigate(`${song.ID}`, {
-      state: {
-        song,
-        songs,
-        index,
-        collection,
-      },
-    });
+  function openDetails(id: number) {
+    const ids = headers.map((header) => String(header.ID));
+    window.sessionStorage.setItem(
+      `${SONG_LIST_STORAGE_PREFIX}${collection}`,
+      JSON.stringify(ids)
+    );
+    navigate(`${id}`);
   }
 
   return (
     <ul className="list">
-      {songs.map((song, index) => (
+      {headers.map((header) => (
         <li
-          key={song.ID}
-          onClick={() => openDetails(song, index)}
+          key={header.ID}
+          onClick={() => openDetails(header.ID)}
         >
-          <span className="id">
-            {song.ID}
-          </span>
+          <span className="id">{header.ID}</span>
+          <span className="title">{header.Title}</span>
 
-          <span className="title">
-            {song.Title}
-          </span>
-
-          {isFavourite(collection, song.ID) && (
-            <span className="favourite">
-              ⭐
-            </span>
+          {isFavourite(header.ID) && (
+            <span className="favourite">⭐</span>
           )}
 
-          {song.Translation && (
-            <div className="translation">
-              {song.Translation}
-            </div>
+          {header.Translation && (
+            <div className="translation">{header.Translation}</div>
           )}
         </li>
       ))}

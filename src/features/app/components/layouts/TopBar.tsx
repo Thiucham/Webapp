@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import ScreenBackDrop from "../ui/ScreenBackDrop";
 
 import "./TopBar.css";
 
-export default function TopBar({ path }) {
+export default function TopBar() {
   const navigate = useNavigate();
+  const routerLocation = useLocation();
 
+  const path = routerLocation.pathname.split("/").filter(Boolean);
   const collection = path[0];
   const showMenu = path.length <= 2;
   const isSearchPage = path[1] === "search";
@@ -16,7 +18,7 @@ export default function TopBar({ path }) {
 
   useEffect(() => {
     setIsMenuOpen(false);
-  }, [location.pathname]);
+  }, [routerLocation.pathname]);
 
   return (
     <>
@@ -25,16 +27,14 @@ export default function TopBar({ path }) {
           className="top-left"
           onClick={() =>
             showMenu
-              ? setIsMenuOpen(prev => !prev)
+              ? setIsMenuOpen((prev) => !prev)
               : navigate(-1)
           }
         >
           {showMenu ? "☰" : "〈"}
         </button>
 
-        <div className="top-center">
-          {collection}
-        </div>
+        <div className="top-center">{collection}</div>
 
         {!isFavourites && (
           <button
@@ -51,45 +51,35 @@ export default function TopBar({ path }) {
       </header>
 
       {isMenuOpen && (
-  <ScreenBackDrop onClose={() => setIsMenuOpen(false)}>
-    <aside className="left-bar">
-      <NavLink
-        to="/Hiuna-Khomlui/list"
-        className="left-item"
-      >
-        Hiuna Khomlui
-      </NavLink>
+        <ScreenBackDrop onClose={() => setIsMenuOpen(false)}>
+          <aside className="left-bar">
+            <NavLink to="/Hiuna-Khomlui/list" className="left-item">
+              Hiuna Khomlui
+            </NavLink>
 
-      <NavLink
-        to="/Khristen-Madui-Lui/list"
-        className="left-item"
-      >
-        Khristen Madui Lui
-      </NavLink>
+            <NavLink to="/Khristen-Madui-Lui/list" className="left-item">
+              Khristen Madui Lui
+            </NavLink>
 
-      <NavLink
-        to="/Luisan/list"
-        className="left-item"
-      >
-        Luisan
-      </NavLink>
+            <NavLink to="/Luisan/list" className="left-item">
+              Luisan
+            </NavLink>
 
-      <NavLink to="/Favourites/list"
-      className="left-item">
-        ⭐ Favourites
-      </NavLink>
+            <NavLink to="/Favourites/list" className="left-item">
+              ⭐ Favourites
+            </NavLink>
 
-      <a
-        className="left-item"
-        href="https://sites.google.com/view/thiucham/content-info"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        ▸ App Info
-      </a>
-    </aside>
-  </ScreenBackDrop>
-)}
+            <a
+              className="left-item"
+              href="https://sites.google.com/view/thiucham/content-info"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ▸ App Info
+            </a>
+          </aside>
+        </ScreenBackDrop>
+      )}
     </>
   );
 }

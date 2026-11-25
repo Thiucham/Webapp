@@ -22,37 +22,7 @@ type Matches = [{
   id: "features/app/features/collection/CollectionShell";
   module: typeof import("../../collection/CollectionShell.js");
 }, {
-  id: "collection-details";
-  module: typeof import("../Details.js");
-}] | [{
-  id: "root";
-  module: typeof import("../../../../../root.js");
-}, {
-  id: "features/app/components/layouts/AppLayout";
-  module: typeof import("../../../components/layouts/AppLayout.js");
-}, {
-  id: "features/app/contexts/FavouritesProvider";
-  module: typeof import("../../../contexts/FavouritesProvider.js");
-}, {
-  id: "features/app/features/search/SearchShell";
-  module: typeof import("../../search/SearchShell.js");
-}, {
-  id: "search-details";
-  module: typeof import("../Details.js");
-}] | [{
-  id: "root";
-  module: typeof import("../../../../../root.js");
-}, {
-  id: "features/app/components/layouts/AppLayout";
-  module: typeof import("../../../components/layouts/AppLayout.js");
-}, {
-  id: "features/app/contexts/FavouritesProvider";
-  module: typeof import("../../../contexts/FavouritesProvider.js");
-}, {
-  id: "features/app/features/favourite/AllFavouritesShell";
-  module: typeof import("../../favourite/AllFavouritesShell.js");
-}, {
-  id: "all-fav-details";
+  id: "features/app/features/details/Details";
   module: typeof import("../Details.js");
 }];
 

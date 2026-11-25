@@ -1,42 +1,25 @@
-import { useEffect, useState } from "react";
-
-import { useAppOutletContext } from "~/features/app/components/layouts/AppLayout";
-import List from "~/features/app/components/ui/List.tsx";
-
-const STORAGE_KEY = "favourites";
+import { useAppData } from "~/features/app/components/layouts/AppLayout";
+import { useFavourites } from "~/features/app/contexts/FavouritesProvider";
+import List from "~/features/app/components/ui/List";
 
 export default function Favourites() {
-  const { songs, collection } = useAppOutletContext();
+  const { songs, collection } = useAppData();
+  const { isFavourite } = useFavourites();
 
-  const [favouriteSongs, setFavouriteSongs] = useState<any[]>([]);
+  const favouriteHeaders = (songs[collection] ?? [])
+    .filter((song) => isFavourite(song.Header.ID))
+    .map((song) => song.Header);
 
-  useEffect(() => {
-    const stored = JSON.parse(
-      localStorage.getItem(STORAGE_KEY) || "{}"
-    );
-
-    const favouriteIds = stored[collection] || [];
-
-    const filteredSongs = songs.filter((song) =>
-      favouriteIds.includes(String(song.ID))
-    );
-
-    setFavouriteSongs(filteredSongs);
-  }, [songs, collection]);
-
-  if (favouriteSongs.length === 0) {
+  if (favouriteHeaders.length === 0) {
     return (
       <main>
         <h2>No favourites yet</h2>
-        <p>You have no favourite songs in this <strong>{collection}</strong>.</p>
+        <p>
+          You have no favourite songs in this <strong>{collection}</strong>.
+        </p>
       </main>
     );
   }
 
-  return (
-    <List
-      songs={favouriteSongs}
-      collection={collection}
-    />
-  );
+  return <List headers={favouriteHeaders} />;
 }

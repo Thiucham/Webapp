@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Outlet,
        useParams,
        useNavigate, } from "react-router";
@@ -5,6 +6,7 @@ import { Outlet,
 import AllList from "./AllList.tsx";
 import Categories from "./Categories.tsx";
 import Favourites from "./Favourites.tsx";
+import Search from "./Search.tsx";
 
 import useSwipe from "~/features/app/hooks/useSwipe.ts";
 import "./CollectionShell.css";
@@ -12,11 +14,13 @@ import "./CollectionShell.css";
 export default function CollectionShell() {
   const navigate = useNavigate();
   const { view } = useParams();
+  const [direction, setDirection] = useState("");
 
   const Views = {
-  alllist: AllList,
-  categories: Categories,
-  favourites: Favourites,
+  AllList: AllList,
+  Categories: Categories,
+  Favourites: Favourites,
+  Search: Search,
 };
 
 const viewOrder = Object.keys(Views);
@@ -26,6 +30,7 @@ const View = Views[view as keyof typeof Views];
 const nextView = () => {
   const index = viewOrder.indexOf(view!);
   if (index < viewOrder.length - 1) {
+    setDirection("right");
     navigate(`../${viewOrder[index + 1]}`);
   }
 };
@@ -33,6 +38,7 @@ const nextView = () => {
 const previousView = () => {
   const index = viewOrder.indexOf(view!);
   if (index > 0) {
+    setDirection("left");
     navigate(`../${viewOrder[index - 1]}`);
   }
 };
@@ -51,11 +57,7 @@ const previousView = () => {
   return (
     <div className="collection-scroll">
       <main
-  className={`collection ${
-    direction === "left"
-      ? "collection-left"
-      : "collection-right"
-  }`}
+  className={`collection-${direction}`}
   onTouchStart={onTouchStart}
   onTouchMove={onTouchMove}
   onTouchEnd={onTouchEnd}

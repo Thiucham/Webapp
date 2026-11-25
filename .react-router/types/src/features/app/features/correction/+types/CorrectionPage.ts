@@ -22,37 +22,7 @@ type Matches = [{
   id: "features/app/features/collection/CollectionShell";
   module: typeof import("../../collection/CollectionShell.js");
 }, {
-  id: "collection-correction";
-  module: typeof import("../CorrectionPage.js");
-}] | [{
-  id: "root";
-  module: typeof import("../../../../../root.js");
-}, {
-  id: "features/app/components/layouts/AppLayout";
-  module: typeof import("../../../components/layouts/AppLayout.js");
-}, {
-  id: "features/app/contexts/FavouritesProvider";
-  module: typeof import("../../../contexts/FavouritesProvider.js");
-}, {
-  id: "features/app/features/search/SearchShell";
-  module: typeof import("../../search/SearchShell.js");
-}, {
-  id: "search-correction";
-  module: typeof import("../CorrectionPage.js");
-}] | [{
-  id: "root";
-  module: typeof import("../../../../../root.js");
-}, {
-  id: "features/app/components/layouts/AppLayout";
-  module: typeof import("../../../components/layouts/AppLayout.js");
-}, {
-  id: "features/app/contexts/FavouritesProvider";
-  module: typeof import("../../../contexts/FavouritesProvider.js");
-}, {
-  id: "features/app/features/favourite/AllFavouritesShell";
-  module: typeof import("../../favourite/AllFavouritesShell.js");
-}, {
-  id: "all-fav-correction";
+  id: "features/app/features/correction/CorrectionPage";
   module: typeof import("../CorrectionPage.js");
 }];
 

@@ -1,24 +1,27 @@
 import { createContext, useContext, useState } from "react";
+import { Outlet, useParams } from "react-router";
 
 const STORAGE_KEY = "favourites";
 
-const FavouritesContext = createContext(null);
+interface FavouritesContextValue {
+  isFavourite: (songId: string | number) => boolean;
+  toggleFavourite: (songId: string | number) => void;
+}
 
-export function FavouritesProvider({ children }) {
-  const [favourites, setFavourites] = useState(() => {
+const FavouritesContext = createContext<FavouritesContextValue | null>(null);
+
+export default function FavouritesProvider() {
+  const { collection = "" } = useParams();
+
+  const [favourites, setFavourites] = useState<Record<string, string[]>>(() => {
+    if (typeof localStorage === "undefined") return {};
     const stored = localStorage.getItem(STORAGE_KEY);
-
-    return stored
-      ? JSON.parse(stored)
-      : {};
+    return stored ? JSON.parse(stored) : {};
   });
 
-  function toggleFavourite(collection, songId) {
+  function toggleFavourite(songId: string | number) {
     const id = String(songId);
-
-    const current =
-      favourites[collection] || [];
-
+    const current = favourites[collection] ?? [];
     const next = current.includes(id)
       ? current.filter((item) => item !== id)
       : [...current, id];
@@ -29,28 +32,18 @@ export function FavouritesProvider({ children }) {
     };
 
     setFavourites(updated);
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(updated)
-    );
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    }
   }
 
-  function isFavourite(collection, songId) {
-    return (
-      favourites[collection]?.includes(String(songId)) ||
-      false
-    );
+  function isFavourite(songId: string | number) {
+    return favourites[collection]?.includes(String(songId)) ?? false;
   }
 
   return (
-    <FavouritesContext.Provider
-      value={{
-        isFavourite,
-        toggleFavourite,
-      }}
-    >
-      {children}
+    <FavouritesContext.Provider value={{ isFavourite, toggleFavourite }}>
+      <Outlet />
     </FavouritesContext.Provider>
   );
 }
@@ -59,9 +52,7 @@ export function useFavourites() {
   const context = useContext(FavouritesContext);
 
   if (!context) {
-    throw new Error(
-      "useFavourites must be used inside FavouritesProvider"
-    );
+    throw new Error("useFavourites must be used inside FavouritesProvider");
   }
 
   return context;

@@ -1,42 +1,58 @@
 import {
   Outlet,
   useLoaderData,
-  useLocation,
-  useOutletContext,
-  type ClientLoaderFunctionArgs,
+  useParams,
+  useRouteLoaderData,
+  type ShouldRevalidateFunctionArgs,
 } from "react-router";
-
-import { CollectionLoader } from "~/features/app/loaders/CollectionLoader";
-
+import {
+  fetchCollectionsFromPublic,
+  loadCollectionsFromDisk,
+  type SongsByCollection,
+} from "~/features/app/loaders/CollectionsLoader.ts";
 import "./AppLayout.css";
+import TopBar from "./TopBar";
 
-import TopBar from "./TopBar.tsx";
+let cachedSongsData: { songs: SongsByCollection } | null = null;
 
-export interface AppOutletContext {
-  collection: string | null;
-  songs: any;
+export async function loader() {
+  return loadCollectionsFromDisk();
 }
 
-export async function clientLoader(args: ClientLoaderFunctionArgs) {
-  return CollectionLoader(args);
+export async function clientLoader() {
+  if (cachedSongsData) {
+    return cachedSongsData;
+  }
+
+  const data = await fetchCollectionsFromPublic();
+  cachedSongsData = data;
+  return data;
+}
+
+export function shouldRevalidate({}: ShouldRevalidateFunctionArgs) {
+  return false;
 }
 
 export default function AppLayout() {
-  const { collection, songs } = useLoaderData<typeof clientLoader>();
-  const location = useLocation();
-  const path = location.pathname.split("/").filter(Boolean);
+  const { songs } = useLoaderData<typeof clientLoader>();
 
   return (
     <div className="app-layout">
-      <TopBar path={path} />
+      <TopBar />
 
       <main className="app-content">
-        <Outlet context={{ collection, songs } satisfies AppOutletContext} />
+        <Outlet />
       </main>
     </div>
   );
 }
 
-export function useAppOutletContext() {
-  return useOutletContext<AppOutletContext>();
+export function useAppData() {
+  const data = useRouteLoaderData<typeof clientLoader>("app-layout");
+  const { collection = "" } = useParams();
+
+  return {
+    songs: (data?.songs ?? {}) as SongsByCollection,
+    collection,
+  };
 }

@@ -1,93 +1,89 @@
-import { useLocation, useNavigate } from "react-router";
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router";
 
-import { useFavourites } from "~/features/app/contexts/FavouritesProvider.tsx";
+import { useAppOutletContext } from "~/features/app/components/layouts/AppLayout";
+import { useFavourites } from "~/features/app/contexts/FavouritesProvider";
 
-import useSongData from "./hooks/useSongData.ts";
+import useSwipe from "~/features/app/hooks/useSwipe";
+import useKeyboardNavigation from "~/features/app/hooks/useKeyboardNavigation";
+import useLyricsSections from "./hooks/useLyricsSections";
 
-import useSwipe from "~/features/app/hooks/useSwipe.ts";
-import useKeyboardNavigation from "~/features/app/hooks/useKeyboardNavigation.ts";
-
-import useLyricsSections from "./hooks/useLyricsSections.ts";
-
-import ScreenBackDrop from "~/features/app/components/ui/ScreenBackDrop.tsx";
-
-import DetailHeader from "./components/DetailHeader.tsx";
-import DetailActions from "./components/DetailActions.tsx";
-import LyricsContent from "./components/LyricsContent.tsx";
-import MoreOptions from "./components/MoreOptions.tsx";
-import ProjectionIcon from "~/features/app/components/ui/icons/ProjectionIcon.tsx";
+import ScreenBackDrop from "~/features/app/components/ui/ScreenBackDrop";
+import DetailHeader from "./components/DetailHeader";
+import DetailActions from "./components/DetailActions";
+import LyricsContent from "./components/LyricsContent";
+import MoreOptions from "./components/MoreOptions";
+import ProjectionIcon from "~/features/app/components/ui/icons/ProjectionIcon";
 
 import "./Details.css";
 
 export default function Details() {
-  const location = useLocation();
+  const { songId } = useParams();
   const navigate = useNavigate();
+  const { songs, collection } = useAppOutletContext();
+  const { isFavourite, toggleFavourite } = useFavourites();
 
   const [showHelp, setShowHelp] = useState(false);
+  const [direction, setDirection] = useState<"left" | "right">("left");
 
-  const fallbackData = useSongData();
+  const allCollectionSongs = songs[collection] ?? [];
 
-let song = location.state?.song;
-let songs;
-let index;
-let collection;
+  let orderedIds: string[] = [];
+  if (typeof window !== "undefined") {
+    const raw = window.sessionStorage.getItem(
+      `${SONG_LIST_STORAGE_PREFIX}${collection}`
+    );
+    if (raw) {
+      orderedIds = JSON.parse(raw);
+    }
+  }
 
-if (!song) {
-  ({ collection, songs, song, index } = fallbackData);
-} else {
-  songs = location.state?.songs;
-  index = location.state?.index;
-  collection = location.state?.collection;
-}
+  const songById = new Map(
+    allCollectionSongs.map((item) => [String(item.Header.ID), item])
+  );
 
- function closeDetails() {
+  const navigableSongs =
+    orderedIds.length > 0
+      ? orderedIds
+          .map((id) => songById.get(String(id)))
+          .filter((item) => Boolean(item))
+      : allCollectionSongs;
+
+  const index = navigableSongs.findIndex(
+    (item) => String(item.Header.ID) === songId
+  );
+  const song = index >= 0 ? navigableSongs[index] : undefined;
+  const songHeader = song?.Header;
+  const songLyrics = song?.Lyrics;
+
+  const sections = useLyricsSections(songLyrics ?? {});
+
+  function closeDetails() {
     navigate(-1);
   }
 
   function openProjection() {
-  navigate("../projection", {
-    state: { lyrics: song.Lyrics },
-  });
-}
+    if (!song || !songLyrics) return;
+    navigate("../projection", {
+      state: { lyrics: songLyrics },
+    });
+  }
 
-function nextSong() {
-  if (index >= songs.length - 1) return;
+  function nextSong() {
+    if (index < 0 || index >= navigableSongs.length - 1) return;
 
-  const nextIndex = index + 1;
-  const nextSong = songs[nextIndex];
+    const nextItem = navigableSongs[index + 1];
+    setDirection("left");
+    navigate(`../${nextItem.Header.ID}`, { replace: true });
+  }
 
-  navigate(`../${nextSong.ID}`, {
-    replace: true,
-    state: {
-      song: nextSong,
-      songs,
-      index: nextIndex,
-      collection,
-    },
-  });
-}
+  function previousSong() {
+    if (index <= 0) return;
 
-function previousSong() {
-  if (index <= 0) return;
-
-  const previousIndex = index - 1;
-  const previousSong = songs[previousIndex];
-
-  navigate(`../${previousSong.ID}`, {
-    replace: true,
-    state: {
-      song: previousSong,
-      songs,
-      index: previousIndex,
-      collection,
-    },
-  });
-}
-
-  const { isFavourite, toggleFavourite } = useFavourites();
-
-  const sections = useLyricsSections(song.Lyrics);
+    const previousItem = navigableSongs[index - 1];
+    setDirection("right");
+    navigate(`../${previousItem.Header.ID}`, { replace: true });
+  }
 
   useKeyboardNavigation({
     onNext: nextSong,
@@ -107,52 +103,62 @@ function previousSong() {
     onSwipeRight: previousSong,
   });
 
+  if (!song) {
+    return (
+      <div className="fullscreen-overlay">
+        <main className="details">
+          <p>Song not found.</p>
+        </main>
+      </div>
+    );
+  }
+
   return (
     <>
       {showHelp && (
         <ScreenBackDrop onClose={() => setShowHelp(false)}>
-  <MoreOptions
-    onClose={() => setShowHelp(false)}
-  />
-  </ScreenBackDrop>
-)}
+          <MoreOptions onClose={() => setShowHelp(false)} />
+        </ScreenBackDrop>
+      )}
 
       <div className="fullscreen-overlay">
         <main
-  className={`details ${
-    direction === "left"
-      ? "details--enter-left"
-      : "details--enter-right"
-  }`}
-  onTouchStart={onTouchStart}
-  onTouchMove={onTouchMove}
-  onTouchEnd={onTouchEnd}
-  style={{
-    transform: `translate3d(${offsetX}px, 0, 0)`,
-    transition: isDragging ? "none" : "transform 0.22s cubic-bezier(0.22, 1, 0.36, 1)",
-  }}
->
-          <DetailHeader song={song.Header} />
+          className={`details ${
+            direction === "left"
+              ? "details--enter-left"
+              : "details--enter-right"
+          }`}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          style={{
+            transform: `translate3d(${offsetX}px, 0, 0)`,
+            transition: isDragging
+              ? "none"
+              : "transform 0.22s cubic-bezier(0.22, 1, 0.36, 1)",
+          }}
+        >
+          <DetailHeader song={songHeader} />
 
-         <DetailActions
-  isFavourite={isFavourite(collection, songId)}
-  onToggle={() => toggleFavourite(collection, songId)}
-  onMore={() => setShowHelp(true)}
-/>
+          <DetailActions
+            isFavourite={isFavourite(songHeader.ID)}
+            onToggle={() => toggleFavourite(songHeader.ID)}
+            onMore={() => setShowHelp(true)}
+          />
 
           <LyricsContent
-  sections={sections}
-  onDoubleClick={openProjection}
-/>
+            sections={sections}
+            onDoubleClick={openProjection}
+          />
         </main>
 
         <button
-      className="projection"
-      onClick={openProjection}
-      aria-label="Open projection"
-    >
-      <ProjectionIcon />
-    </button>
+          className="projection"
+          onClick={openProjection}
+          aria-label="Open projection"
+        >
+          <ProjectionIcon />
+        </button>
       </div>
     </>
   );

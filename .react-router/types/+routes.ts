@@ -45,47 +45,12 @@ type Pages = {
       "view": string;
     };
   };
-  "/app/:collection/search": {
-    params: {
-      "collection": string;
-    };
-  };
-  "/app/:collection/search/:songId": {
-    params: {
-      "collection": string;
-      "songId": string;
-    };
-  };
-  "/app/:collection/search/suggest-correction": {
-    params: {
-      "collection": string;
-    };
-  };
-  "/app/:collection/search/projection": {
-    params: {
-      "collection": string;
-    };
-  };
-  "/app/Favourites/list": {
-    params: {};
-  };
-  "/app/Favourites/list/:songId": {
-    params: {
-      "songId": string;
-    };
-  };
-  "/app/Favourites/list/suggest-correction": {
-    params: {};
-  };
-  "/app/Favourites/list/projection": {
-    params: {};
-  };
 };
 
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/app" | "/app/sign-in" | "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/suggest-correction" | "/app/:collection/:view/projection" | "/app/:collection/search" | "/app/:collection/search/:songId" | "/app/:collection/search/suggest-correction" | "/app/:collection/search/projection" | "/app/Favourites/list" | "/app/Favourites/list/:songId" | "/app/Favourites/list/suggest-correction" | "/app/Favourites/list/projection";
+    page: "/" | "/app" | "/app/sign-in" | "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/suggest-correction" | "/app/:collection/:view/projection";
   };
   "features/site/Home.tsx": {
     id: "features/site/Home";
@@ -101,53 +66,27 @@ type RouteFiles = {
   };
   "features/app/components/layouts/AppLayout.tsx": {
     id: "features/app/components/layouts/AppLayout";
-    page: "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/suggest-correction" | "/app/:collection/:view/projection" | "/app/:collection/search" | "/app/:collection/search/:songId" | "/app/:collection/search/suggest-correction" | "/app/:collection/search/projection" | "/app/Favourites/list" | "/app/Favourites/list/:songId" | "/app/Favourites/list/suggest-correction" | "/app/Favourites/list/projection";
+    page: "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/suggest-correction" | "/app/:collection/:view/projection";
   };
   "features/app/contexts/FavouritesProvider.tsx": {
     id: "features/app/contexts/FavouritesProvider";
-    page: "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/suggest-correction" | "/app/:collection/:view/projection" | "/app/:collection/search" | "/app/:collection/search/:songId" | "/app/:collection/search/suggest-correction" | "/app/:collection/search/projection" | "/app/Favourites/list" | "/app/Favourites/list/:songId" | "/app/Favourites/list/suggest-correction" | "/app/Favourites/list/projection";
+    page: "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/suggest-correction" | "/app/:collection/:view/projection";
   };
   "features/app/features/collection/CollectionShell.tsx": {
     id: "features/app/features/collection/CollectionShell";
     page: "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/suggest-correction" | "/app/:collection/:view/projection";
   };
   "features/app/features/details/Details.tsx": {
-    id: "collection-details";
+    id: "features/app/features/details/Details";
     page: "/app/:collection/:view/:songId";
-  } | {
-    id: "search-details";
-    page: "/app/:collection/search/:songId";
-  } | {
-    id: "all-fav-details";
-    page: "/app/Favourites/list/:songId";
   };
   "features/app/features/correction/CorrectionPage.tsx": {
-    id: "collection-correction";
+    id: "features/app/features/correction/CorrectionPage";
     page: "/app/:collection/:view/suggest-correction";
-  } | {
-    id: "search-correction";
-    page: "/app/:collection/search/suggest-correction";
-  } | {
-    id: "all-fav-correction";
-    page: "/app/Favourites/list/suggest-correction";
   };
   "features/app/features/projection/Projection.tsx": {
-    id: "collection-projection";
+    id: "features/app/features/projection/Projection";
     page: "/app/:collection/:view/projection";
-  } | {
-    id: "search-projection";
-    page: "/app/:collection/search/projection";
-  } | {
-    id: "all-fav-projection";
-    page: "/app/Favourites/list/projection";
-  };
-  "features/app/features/search/SearchShell.tsx": {
-    id: "features/app/features/search/SearchShell";
-    page: "/app/:collection/search" | "/app/:collection/search/:songId" | "/app/:collection/search/suggest-correction" | "/app/:collection/search/projection";
-  };
-  "features/app/features/favourite/AllFavouritesShell.tsx": {
-    id: "features/app/features/favourite/AllFavouritesShell";
-    page: "/app/Favourites/list" | "/app/Favourites/list/:songId" | "/app/Favourites/list/suggest-correction" | "/app/Favourites/list/projection";
   };
 };
 
@@ -159,15 +98,7 @@ type RouteModules = {
   "features/app/components/layouts/AppLayout": typeof import("./src/features/app/components/layouts/AppLayout.tsx");
   "features/app/contexts/FavouritesProvider": typeof import("./src/features/app/contexts/FavouritesProvider.tsx");
   "features/app/features/collection/CollectionShell": typeof import("./src/features/app/features/collection/CollectionShell.tsx");
-  "collection-details": typeof import("./src/features/app/features/details/Details.tsx");
-  "collection-correction": typeof import("./src/features/app/features/correction/CorrectionPage.tsx");
-  "collection-projection": typeof import("./src/features/app/features/projection/Projection.tsx");
-  "features/app/features/search/SearchShell": typeof import("./src/features/app/features/search/SearchShell.tsx");
-  "search-details": typeof import("./src/features/app/features/details/Details.tsx");
-  "search-correction": typeof import("./src/features/app/features/correction/CorrectionPage.tsx");
-  "search-projection": typeof import("./src/features/app/features/projection/Projection.tsx");
-  "features/app/features/favourite/AllFavouritesShell": typeof import("./src/features/app/features/favourite/AllFavouritesShell.tsx");
-  "all-fav-details": typeof import("./src/features/app/features/details/Details.tsx");
-  "all-fav-correction": typeof import("./src/features/app/features/correction/CorrectionPage.tsx");
-  "all-fav-projection": typeof import("./src/features/app/features/projection/Projection.tsx");
+  "features/app/features/details/Details": typeof import("./src/features/app/features/details/Details.tsx");
+  "features/app/features/correction/CorrectionPage": typeof import("./src/features/app/features/correction/CorrectionPage.tsx");
+  "features/app/features/projection/Projection": typeof import("./src/features/app/features/projection/Projection.tsx");
 };

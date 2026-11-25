@@ -28,8 +28,10 @@ export const meta = () => [
 
 export default function Root() {
   useEffect(() => {
+  if (import.meta.env.PROD) {
     registerSW();
-  }, []);
+  }
+}, []);
 
   return (
     <html lang="en">

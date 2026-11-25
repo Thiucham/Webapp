@@ -16,43 +16,9 @@ export default [
           ":collection/:view",
           "features/app/features/collection/CollectionShell.tsx",
           [
-            route(":songId", DETAILS_PAGE, { id: "collection-details" }),
-            route("suggest-correction", CORRECTION_PAGE, {
-              id: "collection-correction",
-            }),
-            route("projection", PROJECTION_PAGE, {
-              id: "collection-projection",
-            }),
-          ]
-        ),
-
-        route(
-          ":collection/search",
-          "features/app/features/search/SearchShell.tsx",
-          [
-            route(":songId", DETAILS_PAGE, { id: "search-details" }),
-            route("suggest-correction", CORRECTION_PAGE, {
-              id: "search-correction",
-            }),
-            route("projection", PROJECTION_PAGE, {
-              id: "search-projection",
-            }),
-          ]
-        ),
-
-        route(
-          "Favourites/list",
-          "features/app/features/favourite/AllFavouritesShell.tsx",
-          [
-            route(":songId", DETAILS_PAGE, {
-              id: "all-fav-details",
-            }),
-            route("suggest-correction", CORRECTION_PAGE, {
-              id: "all-fav-correction",
-            }),
-            route("projection", PROJECTION_PAGE, {
-              id: "all-fav-projection",
-            }),
+            route(":songId", DETAILS_PAGE),
+            route("suggest-correction", CORRECTION_PAGE),
+            route("projection", PROJECTION_PAGE),
           ]
         ),
       ]),
