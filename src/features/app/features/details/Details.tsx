@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 
-import { useAppOutletContext } from "~/features/app/components/layouts/AppLayout";
+import { useAppData } from "~/features/app/components/layouts/AppLayout";
 import { useFavourites } from "~/features/app/contexts/FavouritesProvider";
 
 import useSwipe from "~/features/app/hooks/useSwipe";
@@ -20,7 +20,7 @@ import "./Details.css";
 export default function Details() {
   const { songId } = useParams();
   const navigate = useNavigate();
-  const { songs, collection } = useAppOutletContext();
+  const { songs, collection } = useAppData();
   const { isFavourite, toggleFavourite } = useFavourites();
 
   const [showHelp, setShowHelp] = useState(false);
