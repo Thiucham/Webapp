@@ -1,87 +1,106 @@
+
 .sign-in {
   min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: var(--space-md);
-}
-
-.go-back {
-  position: fixed;
-  top: 1rem;
-  left: 0;
-  width: var(--top-bar-side-width);
-  border: none;
-  background: none;
-  cursor: pointer;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
 }
 
 .sign-in-card {
   width: 100%;
-  max-width: 26rem;
-  text-align: center;
+  max-width: 420px;
 }
 
 .sign-in-card h1 {
-  margin: 0 0 var(--space-xl);
-  font-size: var(--font-title);
+  text-align: center;
+  margin-bottom: 12px;
 }
 
 .sign-in-description {
-  margin: 0;
-  font-size: var(--font-medium);
-  line-height: 1.5;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.go-back {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.google-sign-in-button {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: white;
+  color: #222;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.google-icon {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4285f4;
+}
+
+.sign-in-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 24px 0;
+  color: #888;
+  font-size: 12px;
+}
+
+.sign-in-divider::before,
+.sign-in-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ddd;
 }
 
 .sign-in-card form {
-  margin-top: var(--space-xl);
-  margin-bottom: var(--space-xl);
   display: flex;
   flex-direction: column;
-}
-
-.sign-in-card label {
-  margin-bottom: var(--space-sm);
-  font-weight: var(--font-weight-bold);
-  text-align: left;
+  gap: 12px;
 }
 
 .sign-in-card input {
   width: 100%;
   box-sizing: border-box;
-  padding: var(--space-md);
-  border: 1px solid #ddd;
-  border-radius: var(--radius-md);
-  font-size: var(--font-medium);
-  outline: none;
-}
-
-.sign-in-card input:focus {
-  border-color: #555;
+  min-height: 46px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
 .sign-in-card form button {
-  margin-top: var(--space-md);
-  padding: var(--space-md);
-  border: 1px solid #ddd;
-  border-radius: var(--radius-md);
-  background: none;
-  font-size: var(--font-medium);
+  min-height: 46px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
+}
+
+.sign-in-card form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .sign-in-note {
-  margin: var(--space-md) 0 0;
-  font-size: var(--font-small);
-  line-height: 1.5;
-}
-
-.sign-in-card > button {
-  display: block;
-  margin: var(--space-lg) auto 0;
-  padding: 0;
-  border: none;
-  background: none;
-  font-size: var(--font-small);
-  cursor: pointer;
+  font-size: 12px;
+  color: #888;
+  text-align: center;
 }
