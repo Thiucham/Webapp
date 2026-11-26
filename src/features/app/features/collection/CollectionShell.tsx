@@ -39,7 +39,7 @@ export default function CollectionShell() {
     const index = viewOrder.indexOf(view!);
     if (index < viewOrder.length - 1) {
       setDirection("right");
-      navigate(`../${viewOrder[index + 1]}`);
+      navigate(`/app/${collection}/${viewOrder[index + 1]}`);
     }
   };
 
@@ -47,7 +47,7 @@ export default function CollectionShell() {
     const index = viewOrder.indexOf(view!);
     if (index > 0) {
       setDirection("left");
-      navigate(`../${viewOrder[index - 1]}`);
+      navigate(`/app/${collection}/${viewOrder[index - 1]}`);
     }
   };
 
@@ -78,7 +78,7 @@ export default function CollectionShell() {
       >
 {View && <View songs={songs} collection={collection} />}
       </main>
-      <Outlet />
+      <Outlet context={appData} />
     </div>
   );
 }

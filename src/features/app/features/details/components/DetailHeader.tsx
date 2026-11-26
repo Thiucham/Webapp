@@ -1,11 +1,5 @@
 type DetailHeaderProps = {
-  header: {
-    ID: string;
-    Title: string;
-    Translation?: string;
-    Key?: string;
-    Time?: string;
-  };
+  header: any;
 };
 
 import "./DetailHeader.css";

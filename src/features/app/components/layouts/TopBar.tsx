@@ -9,8 +9,8 @@ export default function TopBar() {
   const routerLocation = useLocation();
 
   const path = routerLocation.pathname.split("/").filter(Boolean);
-  const collection = path[0];
-  const showMenu = path.length <= 2;
+  const collection = path[1];
+  const showMenu = path.length <= 3;
   const isSearchPage = path[1] === "search";
   const isFavourites = collection === "Favourites";
 
@@ -42,7 +42,7 @@ export default function TopBar() {
             onClick={() =>
               isSearchPage
                 ? navigate(-1)
-                : navigate(`/${collection}/search`)
+                : navigate(`/app/${collection}/Search`)
             }
           >
             {isSearchPage ? "✕" : "🔍"}
@@ -53,20 +53,20 @@ export default function TopBar() {
       {isMenuOpen && (
         <ScreenBackDrop onClose={() => setIsMenuOpen(false)}>
           <aside className="left-bar">
-            <NavLink to="/Hiuna-Khomlui/list" className="left-item">
-              Hiuna Khomlui
+            <NavLink to="/app/Hiuna-Khomlui/AllList" className="left-item">
+              ⊞ Hiuna Khomlui
             </NavLink>
 
-            <NavLink to="/Khristen-Madui-Lui/list" className="left-item">
-              Khristen Madui Lui
+            <NavLink to="/app/Khristen-Madui-Lui/AllList" className="left-item">
+              ⊞ Khristen Madui Lui
             </NavLink>
 
-            <NavLink to="/Luisan/list" className="left-item">
-              Luisan
+            <NavLink to="/app/Luisan/AllList" className="left-item">
+             ⊞ Luisan
             </NavLink>
 
-            <NavLink to="/Favourites/list" className="left-item">
-              ⭐ Favourites
+            <NavLink to="/app/" end className="left-item">
+            ⌂ Home
             </NavLink>
 
             <a

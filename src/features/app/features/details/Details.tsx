@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { useNavigate, useParams, useRouteLoaderData } from "react-router";
+import { useNavigate, useParams, useOutletContext } from "react-router";
 import type { AppLoaderData } from "~/features/app/components/layouts/AppLayout";
+
+import { SONG_LIST_STORAGE_PREFIX } from "~/features/app/components/ui/List";
 
 import { useFavourites } from "~/features/app/contexts/FavouritesProvider";
 
@@ -20,7 +22,7 @@ import "./Details.css";
 export default function Details() {
   const { collection = "", songId } = useParams();
   const navigate = useNavigate();
-  const appData = useRouteLoaderData("app-layout") as AppLoaderData | undefined;
+  const appData = useOutletContext<AppLoaderData | undefined>();
   const { isFavourite, toggleFavourite } = useFavourites();
 
   const [showHelp, setShowHelp] = useState(false);
@@ -65,7 +67,7 @@ export default function Details() {
 
   function openProjection() {
     if (!song || !songId || !songLyrics) return;
-    navigate(`${songId}/projection`, {
+    navigate("projection", {
       state: { lyrics: songLyrics },
     });
   }
@@ -104,7 +106,7 @@ export default function Details() {
     onSwipeRight: previousSong,
   });
 
-  if (!song) {
+  if (!song || !songHeader) {
     return (
       <div className="fullscreen-overlay">
         <main className="details">
@@ -139,7 +141,7 @@ export default function Details() {
               : "transform 0.22s cubic-bezier(0.22, 1, 0.36, 1)",
           }}
         >
-          <DetailHeader song={songHeader} />
+          <DetailHeader header={songHeader} />
 
           <DetailActions
             isFavourite={isFavourite(songHeader.ID)}

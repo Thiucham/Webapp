@@ -6,7 +6,7 @@ export default function MoreOptions() {
       <div className="more-options">
         <button
           className="close"
-          onClick={onClose}
+
           aria-label="Close"
         >
           ❌

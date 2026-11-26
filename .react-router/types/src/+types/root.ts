@@ -9,7 +9,7 @@ type Info = GetInfo<{
   module: Module
 }>
 
-type Matches = [{
+type Matches = | [{
   id: "root";
   module: typeof import("../root.js");
 }];

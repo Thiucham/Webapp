@@ -23,12 +23,6 @@ export default function Home() {
         <button onClick={() => navigate("/app/Luisan/AllList")}>
           Luisan
         </button>
-         <button
-        className="home-favourites"
-        onClick={() => navigate("/app/favourites/List")}
-      >
-        ⭐ Favourites
-      </button>
       </div>
 
 

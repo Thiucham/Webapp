@@ -50,41 +50,41 @@ type Pages = {
 };
 
 type RouteFiles = {
-  "root.tsx": {
+  "root.tsx": | {
     id: "root";
     page: "/" | "/app" | "/app/sign-in" | "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/:songId/suggest-correction" | "/app/:collection/:view/:songId/projection";
   };
-  "features/site/Home.tsx": {
+  "features/site/Home.tsx": | {
     id: "features/site/Home";
-    page: "/";
+    page: | "/";
   };
-  "features/app/features/home/Home.tsx": {
+  "features/app/features/home/Home.tsx": | {
     id: "features/app/features/home/Home";
-    page: "/app";
+    page: | "/app";
   };
-  "features/app/features/auth/SignIn.tsx": {
+  "features/app/features/auth/SignIn.tsx": | {
     id: "features/app/features/auth/SignIn";
-    page: "/app/sign-in";
+    page: | "/app/sign-in";
   };
-  "features/app/components/layouts/AppLayout.tsx": {
+  "features/app/components/layouts/AppLayout.tsx": | {
     id: "features/app/components/layouts/AppLayout";
     page: "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/:songId/suggest-correction" | "/app/:collection/:view/:songId/projection";
   };
-  "features/app/features/collection/CollectionShell.tsx": {
+  "features/app/features/collection/CollectionShell.tsx": | {
     id: "features/app/features/collection/CollectionShell";
     page: "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/:songId/suggest-correction" | "/app/:collection/:view/:songId/projection";
   };
-  "features/app/features/details/Details.tsx": {
+  "features/app/features/details/Details.tsx": | {
     id: "features/app/features/details/Details";
-    page: "/app/:collection/:view/:songId";
+    page: | "/app/:collection/:view/:songId";
   };
-  "features/app/features/correction/CorrectionPage.tsx": {
+  "features/app/features/correction/CorrectionPage.tsx": | {
     id: "features/app/features/correction/CorrectionPage";
-    page: "/app/:collection/:view/:songId/suggest-correction";
+    page: | "/app/:collection/:view/:songId/suggest-correction";
   };
-  "features/app/features/projection/Projection.tsx": {
+  "features/app/features/projection/Projection.tsx": | {
     id: "features/app/features/projection/Projection";
-    page: "/app/:collection/:view/:songId/projection";
+    page: | "/app/:collection/:view/:songId/projection";
   };
 };
 
