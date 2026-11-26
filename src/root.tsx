@@ -26,6 +26,23 @@ export const meta = () => [
   },
 ];
 
+export function HydrateFallback() {
+  return (
+    <html lang="en">
+      <head>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <div id="root">
+          <div className="loading-screen">Loading Collections...</div>
+        </div>
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
 export default function Root() {
   useEffect(() => {
   if (import.meta.env.PROD) {

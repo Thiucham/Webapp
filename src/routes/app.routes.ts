@@ -11,17 +11,15 @@ export default [
   layout(
     "features/app/components/layouts/AppLayout.tsx",
     [
-      layout("features/app/contexts/FavouritesProvider.tsx", [
-        route(
-          ":collection/:view",
-          "features/app/features/collection/CollectionShell.tsx",
-          [
-            route(":songId", DETAILS_PAGE),
-            route("suggest-correction", CORRECTION_PAGE),
-            route("projection", PROJECTION_PAGE),
-          ]
-        ),
-      ]),
+      route(
+        ":collection/:view",
+        "features/app/features/collection/CollectionShell.tsx",
+        [
+          route(":songId", DETAILS_PAGE),
+          route("suggest-correction", CORRECTION_PAGE),
+          route("projection", PROJECTION_PAGE),
+        ]
+      ),
     ],
     { id: "app-layout" }
   ),

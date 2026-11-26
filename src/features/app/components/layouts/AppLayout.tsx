@@ -1,25 +1,22 @@
 import {
   Outlet,
-  useLoaderData,
   useParams,
   useRouteLoaderData,
   type ShouldRevalidateFunctionArgs,
 } from "react-router";
 import {
   fetchCollectionsFromPublic,
-  loadCollectionsFromDisk,
   type SongsByCollection,
 } from "~/features/app/loaders/CollectionsLoader.ts";
+import FavouritesProvider from "~/features/app/contexts/FavouritesProvider";
 import "./AppLayout.css";
 import TopBar from "./TopBar";
 
-let cachedSongsData: { songs: SongsByCollection } | null = null;
+type AppLoaderData = { songs: SongsByCollection };
 
-export async function loader() {
-  return loadCollectionsFromDisk();
-}
+let cachedSongsData: AppLoaderData | null = null;
 
-export async function clientLoader() {
+export async function clientLoader(): Promise<AppLoaderData> {
   if (cachedSongsData) {
     return cachedSongsData;
   }
@@ -29,30 +26,31 @@ export async function clientLoader() {
   return data;
 }
 
+clientLoader.hydrate = true;
+
 export function shouldRevalidate({}: ShouldRevalidateFunctionArgs) {
   return false;
 }
 
 export default function AppLayout() {
-  const { songs } = useLoaderData<typeof clientLoader>();
-
   return (
-    <div className="app-layout">
-      <TopBar />
-
-      <main className="app-content">
-        <Outlet />
-      </main>
-    </div>
+    <FavouritesProvider>
+      <div className="app-layout">
+        <TopBar />
+        <main className="app-content">
+          <Outlet />
+        </main>
+      </div>
+    </FavouritesProvider>
   );
 }
 
 export function useAppData() {
-  const data = useRouteLoaderData<typeof clientLoader>("app-layout");
+  const data = useRouteLoaderData("app-layout") as AppLoaderData | undefined;
   const { collection = "" } = useParams();
 
   return {
-    songs: (data?.songs ?? {}) as SongsByCollection,
+    songs: data?.songs ?? {},
     collection,
   };
 }

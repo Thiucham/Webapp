@@ -68,10 +68,6 @@ type RouteFiles = {
     id: "features/app/components/layouts/AppLayout";
     page: "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/suggest-correction" | "/app/:collection/:view/projection";
   };
-  "features/app/contexts/FavouritesProvider.tsx": {
-    id: "features/app/contexts/FavouritesProvider";
-    page: "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/suggest-correction" | "/app/:collection/:view/projection";
-  };
   "features/app/features/collection/CollectionShell.tsx": {
     id: "features/app/features/collection/CollectionShell";
     page: "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/suggest-correction" | "/app/:collection/:view/projection";
@@ -96,7 +92,6 @@ type RouteModules = {
   "features/app/features/home/Home": typeof import("./src/features/app/features/home/Home.tsx");
   "features/app/features/auth/SignIn": typeof import("./src/features/app/features/auth/SignIn.tsx");
   "features/app/components/layouts/AppLayout": typeof import("./src/features/app/components/layouts/AppLayout.tsx");
-  "features/app/contexts/FavouritesProvider": typeof import("./src/features/app/contexts/FavouritesProvider.tsx");
   "features/app/features/collection/CollectionShell": typeof import("./src/features/app/features/collection/CollectionShell.tsx");
   "features/app/features/details/Details": typeof import("./src/features/app/features/details/Details.tsx");
   "features/app/features/correction/CorrectionPage": typeof import("./src/features/app/features/correction/CorrectionPage.tsx");

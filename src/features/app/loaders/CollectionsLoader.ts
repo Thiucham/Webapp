@@ -9,7 +9,7 @@ export type CollectionName = (typeof COLLECTIONS)[number];
 export interface SongHeader {
   ID: number;
   Title: string;
-  Time: string;
+  "Time signature": string;
   Key: string;
   Translation: string;
 }

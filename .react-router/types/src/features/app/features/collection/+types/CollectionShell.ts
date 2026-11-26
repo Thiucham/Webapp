@@ -16,9 +16,6 @@ type Matches = [{
   id: "features/app/components/layouts/AppLayout";
   module: typeof import("../../../components/layouts/AppLayout.js");
 }, {
-  id: "features/app/contexts/FavouritesProvider";
-  module: typeof import("../../../contexts/FavouritesProvider.js");
-}, {
   id: "features/app/features/collection/CollectionShell";
   module: typeof import("../CollectionShell.js");
 }];
