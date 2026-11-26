@@ -9,6 +9,6 @@
   background: #fff;
 }
 
-.collection-content {
+.collection {
   touch-action: pan-y;
 }

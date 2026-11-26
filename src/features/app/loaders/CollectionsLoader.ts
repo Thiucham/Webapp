@@ -52,9 +52,8 @@ export async function fetchCollectionsFromPublic(): Promise<{ songs: SongsByColl
     COLLECTIONS.map(async (collection) => {
       const response = await fetch(`${baseUrl}data/${collection}.json`);
       if (!response.ok) {
-        throw new Response(`Failed to load collection: ${collection}`, {
-          status: response.status || 404,
-        });
+        alert(`Failed to load collection: ${collection}`);
+        return [collection, []] as const;
       }
       const data = await response.json();
       return [collection, data] as const;

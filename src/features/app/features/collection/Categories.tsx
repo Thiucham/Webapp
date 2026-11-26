@@ -1,13 +1,15 @@
-import { useAppData } from "~/features/app/components/layouts/AppLayout";
-import type { SongHeader } from "~/features/app/loaders/CollectionsLoader";
+import type { Song, SongHeader } from "~/features/app/loaders/CollectionsLoader";
 import HeaderList from "~/features/app/components/ui/HeaderList";
 
-export default function Categories() {
-  const { songs, collection } = useAppData();
+type CategoriesProps = {
+  songs: Song[];
+  collection: string;
+};
 
+export default function Categories({ songs }: CategoriesProps) {
   const grouped: Record<string, SongHeader[]> = {};
 
-  for (const song of songs[collection] ?? []) {
+  for (const song of songs) {
     const category = song.Category || "Others";
 
     if (!grouped[category]) {

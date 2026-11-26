@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, useRouteLoaderData } from "react-router";
+import type { AppLoaderData } from "~/features/app/components/layouts/AppLayout";
 
-import { useAppData } from "~/features/app/components/layouts/AppLayout";
 import { useFavourites } from "~/features/app/contexts/FavouritesProvider";
 
 import useSwipe from "~/features/app/hooks/useSwipe";
@@ -18,14 +18,15 @@ import ProjectionIcon from "~/features/app/components/ui/icons/ProjectionIcon";
 import "./Details.css";
 
 export default function Details() {
-  const { songId } = useParams();
+  const { collection = "", songId } = useParams();
   const navigate = useNavigate();
-  const { songs, collection } = useAppData();
+  const appData = useRouteLoaderData("app-layout") as AppLoaderData | undefined;
   const { isFavourite, toggleFavourite } = useFavourites();
 
   const [showHelp, setShowHelp] = useState(false);
   const [direction, setDirection] = useState<"left" | "right">("left");
 
+  const songs = appData?.songs ?? {};
   const allCollectionSongs = songs[collection] ?? [];
 
   let orderedIds: string[] = [];
@@ -63,8 +64,8 @@ export default function Details() {
   }
 
   function openProjection() {
-    if (!song || !songLyrics) return;
-    navigate("../projection", {
+    if (!song || !songId || !songLyrics) return;
+    navigate(`${songId}/projection`, {
       state: { lyrics: songLyrics },
     });
   }

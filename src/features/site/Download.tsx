@@ -1,103 +1,134 @@
-
 export default function Download() {
   return (
     <main>
       {/* Page Heading */}
       <section>
-        <h1>Install Thiucham App on your Android device</h1>
+        <h1>Install Thiucham App</h1>
+        <p>
+          Thiucham works as an installable web app—no app store or APK download
+          needed. Add it to your home screen for full-screen access and faster
+          loading.
+        </p>
 
         <div>
-          <a
-            href="https://rawcdn.githack.com/Thiucham/Webapp/953119da918ed03e92d91dccb6e8771f705f6910/base.apk"
-            download
-          >
-            Download App
-          </a>
-
           <a
             href="https://thiucham.github.io/Webapp/"
             target="_blank"
             rel="noreferrer"
           >
-            Open from browser
+            Open Thiucham Web App
           </a>
         </div>
       </section>
 
-      {/* Installation Guide */}
+      {/* Platform Guides */}
       <section>
-        <h2>Simplified APK Installation Guide</h2>
+        <h2>How to Install on Your Device</h2>
 
+        {/* Android */}
         <div>
-          <h3>1. Download the App</h3>
-          <p>Tap the "Download App" button.</p>
-        </div>
-
-        <div>
-          <h3>2. Open the File</h3>
-          <p>
-            Once it's downloaded, open your phone's
-            "Downloads" folder (you can usually find this
-            in your file manager app or through your
-            browser's download list). Then, tap on the
-            downloaded Thiucham App APK file.
-          </p>
-        </div>
-
-        <div>
-          <h3>3. Allow Installation</h3>
-          <p>
-            Your phone will likely warn you that this
-            type of file can be harmful. This is normal
-            for apps not from the Google Play Store.
-            You'll need to allow your browser (like
-            Chrome) to install apps from unknown sources.
-            The exact steps for this vary a little, but
-            generally you'll:
-          </p>
-
-          <ul>
-            <li>Go to your device's Settings.</li>
+          <h3>Android (Chrome / Edge / Brave)</h3>
+          <ol>
             <li>
-              Look for Apps, Apps & Notifications, or
-              Security & Privacy.
+              Open{" "}
+              <a
+                href="https://thiucham.github.io/Webapp/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                thiucham.github.io/Webapp
+              </a>{" "}
+              in <strong>Chrome</strong>.
             </li>
             <li>
-              Find Special app access or Install
-              unknown apps.
+              Tap the <strong>three-dot menu (⋮)</strong> in the top-right
+              corner of the browser.
             </li>
             <li>
-              Select the browser you used to download
-              the file (e.g., Chrome) and toggle on
-              the permission to "Allow from this source".
+              Tap <strong>Add to Home screen</strong> or{" "}
+              <strong>Install app</strong>, then confirm by tapping{" "}
+              <strong>Install</strong>.
             </li>
-          </ul>
+          </ol>
         </div>
 
+        {/* iOS */}
         <div>
-          <h3>4. Install and Open</h3>
-          <p>
-            After granting permission, you can proceed
-            with the installation. Once it's done,
-            you'll find the Thiucham App on your
-            device's home screen. The first time you
-            open it, you'll need an internet connection
-            to set it up.
-          </p>
+          <h3>iPhone &amp; iPad (Safari)</h3>
+          <ol>
+            <li>
+              Open{" "}
+              <a
+                href="https://thiucham.github.io/Webapp/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                thiucham.github.io/Webapp
+              </a>{" "}
+              in <strong>Safari</strong>.
+            </li>
+            <li>
+              Tap the <strong>Share</strong> icon (the square with an arrow
+              pointing up) at the bottom of the screen.
+            </li>
+            <li>
+              Scroll down and tap <strong>Add to Home Screen</strong>, then tap{" "}
+              <strong>Add</strong> in the top-right corner.
+            </li>
+          </ol>
+        </div>
+
+        {/* Desktop */}
+        <div>
+          <h3>Desktop (Chrome / Edge)</h3>
+          <ol>
+            <li>
+              Open{" "}
+              <a
+                href="https://thiucham.github.io/Webapp/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                thiucham.github.io/Webapp
+              </a>{" "}
+              in Chrome or Edge.
+            </li>
+            <li>
+              Click the <strong>Install icon</strong> on the right side of the
+              address bar (or open the browser menu <strong>⋮</strong> →{" "}
+              <strong>Cast, save, and share</strong> →{" "}
+              <strong>Install page as app</strong>).
+            </li>
+            <li>
+              Click <strong>Install</strong> to add Thiucham to your apps and
+              desktop.
+            </li>
+          </ol>
         </div>
       </section>
 
-      {/* Reviews */}
+      {/* Helpful Notes */}
       <section>
-        <h2>Public User Reviews</h2>
-
-        <a
-          href="https://sites.google.com/view/thiucham/We-Love-Your-Review"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Leave a review
-        </a>
+        <h2>Good to Know</h2>
+        <ul>
+          <li>
+            <strong>Automatic updates:</strong> Unlike an APK, the installed
+            web app updates automatically whenever new songs or features are
+            published—you never have to reinstall it.
+          </li>
+          <li>
+            <strong>Use the main browser:</strong> If you opened this link
+            inside WhatsApp, Facebook, or Instagram&apos;s in-app browser, tap
+            the menu and choose <strong>Open in Chrome</strong> or{" "}
+            <strong>Open in Safari</strong> first, as in-app browsers do not
+            support installing apps.
+          </li>
+          <li>
+            <strong>Already on the app?</strong> If you are viewing this page
+            inside Thiucham right now, just open your browser&apos;s menu
+            directly without opening a new tab.
+          </li>
+        </ul>
       </section>
     </main>
   );

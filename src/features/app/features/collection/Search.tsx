@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { useAppData } from "~/features/app/components/layouts/AppLayout";
-import type { SongHeader } from "~/features/app/loaders/CollectionsLoader";
+import type { Song, SongHeader } from "~/features/app/loaders/CollectionsLoader";
 import List from "~/features/app/components/ui/List";
 import "./Search.css";
+
+type SearchProps = {
+  songs: Song[];
+  collection: string;
+};
 
 function normalize(str?: string) {
   return (str || "")
@@ -10,9 +14,7 @@ function normalize(str?: string) {
     .replace(/[ !,.?'-]/g, "");
 }
 
-export default function Search() {
-  const { songs, collection } = useAppData();
-
+export default function Search({ songs }: SearchProps) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -21,12 +23,11 @@ export default function Search() {
   }, []);
 
   const normalizedQuery = normalize(query);
-  const collectionSongs = songs[collection] ?? [];
 
   const results: SongHeader[] =
     normalizedQuery === ""
       ? []
-      : collectionSongs
+      : songs
           .filter(
             (song) =>
               String(song.Header.ID).includes(normalizedQuery) ||

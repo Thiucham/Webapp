@@ -1,7 +1,6 @@
 import {
   Outlet,
-  useParams,
-  useRouteLoaderData,
+  useLoaderData,
   type ShouldRevalidateFunctionArgs,
 } from "react-router";
 import {
@@ -12,7 +11,7 @@ import FavouritesProvider from "~/features/app/contexts/FavouritesProvider";
 import "./AppLayout.css";
 import TopBar from "./TopBar";
 
-type AppLoaderData = { songs: SongsByCollection };
+export type AppLoaderData = { songs: SongsByCollection };
 
 let cachedSongsData: AppLoaderData | null = null;
 
@@ -26,31 +25,23 @@ export async function clientLoader(): Promise<AppLoaderData> {
   return data;
 }
 
-clientLoader.hydrate = true;
+clientLoader.hydrate = true as const;
 
 export function shouldRevalidate({}: ShouldRevalidateFunctionArgs) {
   return false;
 }
 
 export default function AppLayout() {
+  const data = useLoaderData() as AppLoaderData | undefined;
+
   return (
     <FavouritesProvider>
       <div className="app-layout">
         <TopBar />
         <main className="app-content">
-          <Outlet />
+          <Outlet context={data} />
         </main>
       </div>
     </FavouritesProvider>
   );
-}
-
-export function useAppData() {
-  const data = useRouteLoaderData("app-layout") as AppLoaderData | undefined;
-  const { collection = "" } = useParams();
-
-  return {
-    songs: data?.songs ?? {},
-    collection,
-  };
 }

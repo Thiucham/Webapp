@@ -1,13 +1,13 @@
-import { useAppData } from "~/features/app/components/layouts/AppLayout";
 import List from "~/features/app/components/ui/List.tsx";
+import type { Song } from "~/features/app/loaders/CollectionsLoader.ts";
 
-export default function AllList() {
-  const { songs, collection } = useAppData();
+type AllListProps = {
+  songs: Song[];
+  collection: string;
+};
 
-  console.log("AllList debug:", { collection, keys: Object.keys(songs), count: songs[collection]?.length });
-
-  const headers = (songs[collection] ?? []).map((song) => song.Header);
-
+export default function AllList({ songs }: AllListProps) {
+  const headers = songs.map((song) => song.Header);
 
   return <List headers={headers} />;
 }

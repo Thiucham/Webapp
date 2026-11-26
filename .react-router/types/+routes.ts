@@ -33,16 +33,18 @@ type Pages = {
       "songId": string;
     };
   };
-  "/app/:collection/:view/suggest-correction": {
+  "/app/:collection/:view/:songId/suggest-correction": {
     params: {
       "collection": string;
       "view": string;
+      "songId": string;
     };
   };
-  "/app/:collection/:view/projection": {
+  "/app/:collection/:view/:songId/projection": {
     params: {
       "collection": string;
       "view": string;
+      "songId": string;
     };
   };
 };
@@ -50,7 +52,7 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/app" | "/app/sign-in" | "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/suggest-correction" | "/app/:collection/:view/projection";
+    page: "/" | "/app" | "/app/sign-in" | "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/:songId/suggest-correction" | "/app/:collection/:view/:songId/projection";
   };
   "features/site/Home.tsx": {
     id: "features/site/Home";
@@ -66,11 +68,11 @@ type RouteFiles = {
   };
   "features/app/components/layouts/AppLayout.tsx": {
     id: "features/app/components/layouts/AppLayout";
-    page: "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/suggest-correction" | "/app/:collection/:view/projection";
+    page: "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/:songId/suggest-correction" | "/app/:collection/:view/:songId/projection";
   };
   "features/app/features/collection/CollectionShell.tsx": {
     id: "features/app/features/collection/CollectionShell";
-    page: "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/suggest-correction" | "/app/:collection/:view/projection";
+    page: "/app/:collection/:view" | "/app/:collection/:view/:songId" | "/app/:collection/:view/:songId/suggest-correction" | "/app/:collection/:view/:songId/projection";
   };
   "features/app/features/details/Details.tsx": {
     id: "features/app/features/details/Details";
@@ -78,11 +80,11 @@ type RouteFiles = {
   };
   "features/app/features/correction/CorrectionPage.tsx": {
     id: "features/app/features/correction/CorrectionPage";
-    page: "/app/:collection/:view/suggest-correction";
+    page: "/app/:collection/:view/:songId/suggest-correction";
   };
   "features/app/features/projection/Projection.tsx": {
     id: "features/app/features/projection/Projection";
-    page: "/app/:collection/:view/projection";
+    page: "/app/:collection/:view/:songId/projection";
   };
 };
 

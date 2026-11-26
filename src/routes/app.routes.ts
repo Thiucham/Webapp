@@ -16,8 +16,8 @@ export default [
         "features/app/features/collection/CollectionShell.tsx",
         [
           route(":songId", DETAILS_PAGE),
-          route("suggest-correction", CORRECTION_PAGE),
-          route("projection", PROJECTION_PAGE),
+          route(":songId/suggest-correction", CORRECTION_PAGE),
+          route(":songId/projection", PROJECTION_PAGE),
         ]
       ),
     ],
